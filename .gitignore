@@ -1,0 +1,13 @@
+node_modules/
+.next/
+out/
+dist/
+*.log
+desktop.png
+mobile.png
+mobile-full.png
+reviews-desktop.png
+reviews-mobile.png
+
+# Environment — never commit real credentials
+.env.local
