@@ -474,7 +474,7 @@ export default function TeamCarousel() {
             <span className="team-heading-gradient">Expert Team</span>
           </h2>
           <p className="mt-6 font-body text-base leading-8 text-[#A1A1AA] sm:text-lg">
-            Six creatives. Six anime alter-egos. One unstoppable force. Click any card to explore their story.
+            Six talented creatives. One unstoppable team. Click any card to explore their story.
           </p>
         </div>
 
@@ -510,24 +510,24 @@ export default function TeamCarousel() {
                   aria-label={`View ${member.name}'s profile`}
                 >
                   <div className="team-card-img-wrap">
-                    <Image src={member.image} alt={`${member.animeChar} — ${member.name}`}
+                    <Image src={member.image} alt={`${member.name} — ${member.occupation}`}
                       fill sizes="260px" className="team-card-img" />
                     <div className="team-card-shimmer" aria-hidden="true" />
                     <span className="team-card-tag"
                       style={{ color: member.accentColor, borderColor: member.accentColor + "55", background: member.accentColor + "18" }}>
-                      {member.tag}
+                      {member.occupation}
                     </span>
                   </div>
                   <div className="team-card-body">
-                    <div className="team-card-anime" style={{ color: member.accentColor }}>
-                      {member.anime} · {member.animeChar}
+                    <div className="team-card-expertise" style={{ color: member.accentColor }}>
+                      {member.expertise}
                     </div>
                     <div className="team-card-name">{member.name}</div>
                     <div className="team-card-role">{member.occupation}</div>
                     <div className="team-card-spec">{member.spec}</div>
                   </div>
                   <div className="team-card-click-hint" style={{ color: member.accentColor }}>
-                    Click to view profile →
+                    View Profile
                   </div>
                   {isActive && (
                     <div className="team-card-active-glow"

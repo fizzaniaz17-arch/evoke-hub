@@ -134,7 +134,6 @@ export default function CostCalculator() {
                     style={{ "--cat-color": cat.color } as React.CSSProperties}
                     aria-expanded={isOpen}
                   >
-                    <span className="calc-cat-icon">{cat.icon}</span>
                     <span className="calc-cat-label">{cat.label}</span>
                     {catSelected > 0 && (
                       <span className="calc-cat-badge" style={{ background: cat.color }}>

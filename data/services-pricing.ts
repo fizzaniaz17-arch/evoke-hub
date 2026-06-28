@@ -1,4 +1,4 @@
-/* ─────────────────────────────────────────────────────────
+﻿/* ─────────────────────────────────────────────────────────
    Evoke Hub — Services Pricing Data  (from official rate card)
 ───────────────────────────────────────────────────────── */
 
@@ -27,7 +27,7 @@ export const SERVICE_CATEGORIES: ServiceCategory[] = [
   {
     id: "amazon-photography",
     label: "Amazon Photography",
-    icon: "📸",
+    icon: "PHOTO",
     color: "#3498DB",
     services: [
       {
@@ -97,7 +97,7 @@ export const SERVICE_CATEGORIES: ServiceCategory[] = [
   {
     id: "amazon-video",
     label: "Amazon Video",
-    icon: "🎬",
+    icon: "VIDEO",
     color: "#FF8C00",
     services: [
       {
@@ -167,7 +167,7 @@ export const SERVICE_CATEGORIES: ServiceCategory[] = [
   {
     id: "amazon-copywriting",
     label: "Amazon Copywriting",
-    icon: "✍️",
+    icon: "COPY",
     color: "#A855F7",
     services: [
       {
@@ -197,7 +197,7 @@ export const SERVICE_CATEGORIES: ServiceCategory[] = [
   {
     id: "studio-model",
     label: "Studio & Model",
-    icon: "🏢",
+    icon: "STUDIO",
     color: "#4ADE80",
     services: [
       {
@@ -227,7 +227,7 @@ export const SERVICE_CATEGORIES: ServiceCategory[] = [
   {
     id: "tiktok-shop",
     label: "TikTok Shop",
-    icon: "🎵",
+    icon: "TIKTOK",
     color: "#FF0050",
     services: [
       {
@@ -267,7 +267,7 @@ export const SERVICE_CATEGORIES: ServiceCategory[] = [
   {
     id: "market-campaign",
     label: "Market Campaign",
-    icon: "📣",
+    icon: "CAMPAIGN",
     color: "#EC4899",
     services: [
       {
@@ -285,3 +285,4 @@ export const SERVICE_CATEGORIES: ServiceCategory[] = [
 ];
 
 export const ALL_SERVICES: ServiceItem[] = SERVICE_CATEGORIES.flatMap(c => c.services);
+

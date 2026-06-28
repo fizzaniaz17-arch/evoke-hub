@@ -1956,7 +1956,7 @@ a {
   left: 0;
   right: 0;
   z-index: 1900;
-  padding: 0 32px;
+  padding: 0 clamp(14px, 4vw, 32px);
   height: 68px;
   display: flex;
   align-items: center;
@@ -1980,7 +1980,7 @@ a {
   width: 100%;
   max-width: 1280px;
   margin: 0 auto;
-  gap: 32px;
+  gap: clamp(10px, 2.5vw, 32px);
 }
 
 /* Logo */
@@ -2304,8 +2304,8 @@ a {
 /* ── Main two-column grid ── */
 .calc-grid {
   display: grid;
-  grid-template-columns: 1fr 420px;
-  gap: 32px;
+  grid-template-columns: 1fr min(420px, 40%);
+  gap: clamp(20px, 3vw, 32px);
   align-items: start;
 }
 
@@ -2448,9 +2448,9 @@ a {
   font-size: 12px;
   font-weight: 700;
   color: rgba(255, 255, 255, 0.88);
-  white-space: nowrap;
-  overflow: hidden;
-  text-overflow: ellipsis;
+  white-space: normal;
+  word-break: break-word;
+  line-height: 1.3;
 }
 
 .calc-service-desc {
@@ -2778,7 +2778,7 @@ a {
 
 
 /* -------------------------------------------------------
-   VIDEO TICKER � Testimonial / Portfolio Reel
+   VIDEO TICKER � Testimonial / Portfolio Reel
    ------------------------------------------------------- */
 
 .vt-section {
@@ -2819,7 +2819,7 @@ a {
   margin: 0;
 }
 
-/* -- Outer wrapper � hides overflow -- */
+/* -- Outer wrapper � hides overflow -- */
 .vt-wrap {
   position: relative;
   overflow: hidden;
@@ -2841,7 +2841,7 @@ a {
 .vt-fade--left  { left:  0; background: linear-gradient(to right, #04070f 0%, transparent 100%); }
 .vt-fade--right { right: 0; background: linear-gradient(to left,  #04070f 0%, transparent 100%); }
 
-/* -- Scrolling track � HORIZONTAL flex row -- */
+/* -- Scrolling track � HORIZONTAL flex row -- */
 .vt-track {
   display: flex;
   flex-direction: row;
@@ -2893,7 +2893,7 @@ a {
   display: block;
 }
 
-/* -- Overlay � revealed on hover -- */
+/* -- Overlay � revealed on hover -- */
 .vt-overlay {
   position: absolute;
   inset: 0;
@@ -2955,3 +2955,1836 @@ a {
 }
 
 .vt-pause-hint--visible { opacity: 1; }
+
+
+/* =====================================================
+   COMPREHENSIVE MOBILE RESPONSIVE OVERRIDES
+   Breakpoints:
+     480px  - small phones
+     640px  - large phones / small tablets
+     768px  - tablets (portrait)
+     860px  - tablets (landscape) / nav breakpoint
+     960px  - small laptops
+   ===================================================== */
+
+/* -------------------------------------------------------
+   GLOBAL BASE - viewport meta safety & overflow guards
+   ------------------------------------------------------- */
+html {
+  overflow-x: hidden;
+}
+
+body {
+  overflow-x: hidden;
+}
+
+/* -------------------------------------------------------
+   HERO SECTION - logo & CTA button
+   ------------------------------------------------------- */
+@media (max-width: 768px) {
+  .hero-logo-wrap {
+    width: min(400px, 88vw);
+  }
+}
+
+@media (max-width: 480px) {
+  .hero-logo-wrap {
+    width: min(320px, 92vw);
+  }
+}
+
+/* -------------------------------------------------------
+   NAVBAR - padding tightening on small screens
+   ------------------------------------------------------- */
+@media (max-width: 480px) {
+  .site-nav {
+    padding: 0 16px;
+  }
+
+  .nav-logo-wrap {
+    width: 90px;
+    height: 36px;
+  }
+}
+
+/* -------------------------------------------------------
+   TEAM CAROUSEL - tighter vertical padding
+   ------------------------------------------------------- */
+@media (max-width: 768px) {
+  section#team {
+    padding-top: 64px;
+    padding-bottom: 64px;
+  }
+
+  .team-stage {
+    margin-top: 40px;
+  }
+}
+
+@media (max-width: 480px) {
+  section#team {
+    padding-top: 48px;
+    padding-bottom: 48px;
+    padding-left: 16px;
+    padding-right: 16px;
+  }
+
+  .team-stage {
+    height: 380px;
+    perspective: 800px;
+    margin-top: 28px;
+  }
+
+  .team-card {
+    width: 130px;
+    border-radius: 14px;
+  }
+
+  .team-card-img-wrap {
+    height: 155px;
+  }
+
+  .team-orbit-ring {
+    width: 420px;
+    height: 420px;
+  }
+
+  /* Spotlight text under carousel */
+  .team-spotlight p {
+    font-size: 18px !important;
+  }
+}
+
+/* -------------------------------------------------------
+   MEMBER DETAIL MODAL - full width on mobile
+   ------------------------------------------------------- */
+@media (max-width: 768px) {
+  .member-modal {
+    border-radius: 20px;
+    width: calc(100vw - 24px);
+  }
+
+  .member-modal-inner {
+    padding: 24px 20px 20px;
+    gap: 20px;
+  }
+
+  /* Hero row: portrait on top, stats below as 2-col grid */
+  .member-modal-hero {
+    grid-template-columns: 1fr;
+    grid-template-rows: auto auto auto;
+  }
+
+  .member-modal-stats--left {
+    order: 2;
+    text-align: left;
+    align-items: flex-start;
+    flex-direction: row;
+    flex-wrap: wrap;
+    gap: 12px;
+  }
+
+  .member-modal-stats--right {
+    order: 3;
+    flex-direction: row;
+    flex-wrap: wrap;
+    gap: 12px;
+  }
+
+  .member-modal-portrait-col {
+    order: 1;
+  }
+
+  .member-modal-watermark {
+    display: none;
+  }
+}
+
+@media (max-width: 480px) {
+  .member-modal {
+    border-radius: 16px;
+    width: calc(100vw - 16px);
+    max-height: calc(100vh - 24px);
+  }
+
+  .member-modal-inner {
+    padding: 18px 16px 16px;
+  }
+
+  .member-modal-close {
+    top: 12px;
+    right: 12px;
+    width: 36px;
+    height: 36px;
+  }
+}
+
+/* -------------------------------------------------------
+   SERVICES GRID - already 3-col at 900, 2-col at 540
+   Extra: 1-col at 380px (very small phones)
+   ------------------------------------------------------- */
+@media (max-width: 380px) {
+  .services-grid {
+    grid-template-columns: 1fr;
+  }
+
+  .service-tile {
+    min-height: 72px;
+    padding: 16px 16px 12px;
+  }
+}
+
+/* Services section padding */
+@media (max-width: 768px) {
+  section#services {
+    padding-top: 64px !important;
+    padding-bottom: 64px !important;
+    padding-left: 20px !important;
+    padding-right: 20px !important;
+  }
+}
+
+@media (max-width: 480px) {
+  section#services {
+    padding-top: 48px !important;
+    padding-bottom: 48px !important;
+    padding-left: 16px !important;
+    padding-right: 16px !important;
+  }
+}
+
+/* -------------------------------------------------------
+   VIDEOGRAPHY SECTION - headings & padding
+   ------------------------------------------------------- */
+@media (max-width: 768px) {
+  .videography-section .relative.mx-auto {
+    padding-left: 20px;
+    padding-right: 20px;
+    padding-top: 64px;
+    padding-bottom: 64px;
+  }
+
+  .videography-title {
+    font-size: clamp(36px, 10vw, 56px) !important;
+  }
+}
+
+@media (max-width: 480px) {
+  .videography-section .relative.mx-auto {
+    padding-left: 16px;
+    padding-right: 16px;
+    padding-top: 48px;
+    padding-bottom: 48px;
+  }
+
+  .videography-title {
+    font-size: clamp(30px, 9vw, 44px) !important;
+  }
+
+  .vid-channel-cta {
+    padding: 12px 20px;
+    font-size: 12px;
+  }
+}
+
+/* Individual video card on very small screens */
+@media (max-width: 380px) {
+  .vid-card {
+    min-width: 0;
+  }
+
+  .vid-card-bar {
+    flex-direction: column;
+    align-items: flex-start;
+    gap: 8px;
+  }
+
+  .vid-card-actions {
+    width: 100%;
+    justify-content: flex-end;
+  }
+}
+
+/* -------------------------------------------------------
+   CLIENT REVIEWS (ISO STACK) - section padding
+   ------------------------------------------------------- */
+@media (max-width: 768px) {
+  .stack-section {
+    padding-top: 64px !important;
+    padding-bottom: 64px !important;
+    padding-left: 20px !important;
+    padding-right: 20px !important;
+  }
+}
+
+@media (max-width: 480px) {
+  .stack-section {
+    padding-top: 48px !important;
+    padding-bottom: 48px !important;
+    padding-left: 16px !important;
+    padding-right: 16px !important;
+  }
+
+  .stack-scene-wrap {
+    height: 360px;
+  }
+
+  .iso-stack-card {
+    width: calc(100vw - 36px);
+    min-height: 210px;
+    border-radius: 16px;
+  }
+
+  /* Pop-out card full width */
+  .pop-card {
+    border-radius: 16px;
+    width: calc(100vw - 16px);
+    max-height: calc(100vh - 20px);
+  }
+
+  .pop-content {
+    padding: 20px 16px;
+  }
+
+  .pop-name {
+    font-size: 22px;
+  }
+
+  .pop-quote {
+    font-size: 14px;
+    line-height: 1.7;
+  }
+}
+
+/* -------------------------------------------------------
+   VIDEO TICKER SECTION - padding & card sizes
+   ------------------------------------------------------- */
+@media (max-width: 768px) {
+  .vt-section {
+    padding-top: 64px !important;
+    padding-bottom: 64px !important;
+    padding-left: 20px !important;
+    padding-right: 20px !important;
+  }
+
+  .vt-fade {
+    width: 80px;
+  }
+
+  .vt-card {
+    width: 260px;
+    height: 146px;
+  }
+}
+
+@media (max-width: 480px) {
+  .vt-section {
+    padding-top: 48px !important;
+    padding-bottom: 48px !important;
+    padding-left: 16px !important;
+    padding-right: 16px !important;
+  }
+
+  .vt-fade {
+    width: 48px;
+  }
+
+  .vt-card {
+    width: 220px;
+    height: 124px;
+  }
+
+  .vt-title {
+    font-size: clamp(28px, 9vw, 44px);
+  }
+}
+
+/* -------------------------------------------------------
+   COST CALCULATOR SECTION - padding & layout
+   ------------------------------------------------------- */
+@media (max-width: 768px) {
+  .calc-section {
+    padding-top: 64px !important;
+    padding-bottom: 64px !important;
+    padding-left: 20px !important;
+    padding-right: 20px !important;
+  }
+
+  .calc-header {
+    flex-direction: column;
+    align-items: flex-start;
+    margin-bottom: 32px;
+  }
+
+  .calc-download-btn {
+    align-self: flex-start;
+  }
+
+  .calc-title {
+    font-size: clamp(30px, 8vw, 52px);
+  }
+}
+
+@media (max-width: 480px) {
+  .calc-section {
+    padding-top: 48px !important;
+    padding-bottom: 48px !important;
+    padding-left: 16px !important;
+    padding-right: 16px !important;
+  }
+
+  .calc-title {
+    font-size: clamp(26px, 8vw, 40px);
+  }
+
+  .calc-cat-header {
+    padding: 14px 14px;
+  }
+
+  .calc-service-list {
+    padding: 6px 8px 8px;
+  }
+}
+
+/* -------------------------------------------------------
+   FOOTER CTA BANNER - stack on small screens
+   ------------------------------------------------------- */
+@media (max-width: 768px) {
+  .footer-cta-banner .relative.mx-auto {
+    padding-left: 20px !important;
+    padding-right: 20px !important;
+    padding-top: 64px !important;
+    padding-bottom: 64px !important;
+    gap: 32px;
+  }
+}
+
+@media (max-width: 640px) {
+  .footer-cta-banner h2 {
+    font-size: clamp(28px, 9vw, 44px) !important;
+  }
+}
+
+@media (max-width: 480px) {
+  .footer-cta-banner .relative.mx-auto {
+    padding-left: 16px !important;
+    padding-right: 16px !important;
+    padding-top: 48px !important;
+    padding-bottom: 48px !important;
+    gap: 24px;
+  }
+
+  .footer-cta-btn {
+    width: 100%;
+    text-align: center;
+    justify-content: center;
+  }
+}
+
+/* -------------------------------------------------------
+   MAIN FOOTER - padding & columns
+   ------------------------------------------------------- */
+@media (max-width: 768px) {
+  .site-footer .relative.mx-auto {
+    padding-left: 20px !important;
+    padding-right: 20px !important;
+    padding-top: 48px !important;
+    padding-bottom: 48px !important;
+  }
+
+  .footer-bottom .mx-auto {
+    padding-left: 20px !important;
+    padding-right: 20px !important;
+  }
+}
+
+@media (max-width: 480px) {
+  .site-footer .relative.mx-auto {
+    padding-left: 16px !important;
+    padding-right: 16px !important;
+    padding-top: 40px !important;
+    padding-bottom: 40px !important;
+    gap: 32px !important;
+  }
+
+  .footer-bottom .mx-auto {
+    padding-left: 16px !important;
+    padding-right: 16px !important;
+  }
+
+  .footer-brand-desc {
+    max-width: 100%;
+  }
+}
+
+/* -------------------------------------------------------
+   GLOBAL SECTION HEADINGS - clamp for all phones
+   ------------------------------------------------------- */
+@media (max-width: 640px) {
+  .font-heading.text-5xl,
+  h2.font-heading {
+    font-size: clamp(28px, 8vw, 44px) !important;
+  }
+
+  .font-heading.text-6xl {
+    font-size: clamp(32px, 9vw, 50px) !important;
+  }
+
+  .font-heading.text-7xl {
+    font-size: clamp(34px, 10vw, 56px) !important;
+  }
+}
+
+@media (max-width: 480px) {
+  .font-heading.text-5xl,
+  h2.font-heading {
+    font-size: clamp(24px, 8vw, 36px) !important;
+  }
+
+  .font-heading.text-6xl {
+    font-size: clamp(26px, 8.5vw, 40px) !important;
+  }
+
+  .font-heading.text-7xl {
+    font-size: clamp(28px, 9vw, 44px) !important;
+  }
+}
+
+/* -------------------------------------------------------
+   HERO CTA BUTTON - full width on tiny phones
+   ------------------------------------------------------- */
+@media (max-width: 380px) {
+  #hero-cta {
+    padding: 10px 18px;
+    font-size: 12px;
+  }
+}
+
+/* -------------------------------------------------------
+   SCROLL-TO-TOP BUTTON - smaller on mobile
+   ------------------------------------------------------- */
+@media (max-width: 480px) {
+  .scroll-top-btn {
+    bottom: 16px;
+    right: 16px;
+    width: 40px;
+    height: 40px;
+  }
+}
+
+/* -------------------------------------------------------
+   MEMBER MODAL - portrait responsive fix
+   ------------------------------------------------------- */
+@media (max-width: 640px) {
+  .member-modal-portrait-wrap {
+    height: 260px !important;
+  }
+}
+
+/* -------------------------------------------------------
+   TOUCH IMPROVEMENTS - better tap targets across devices
+   ------------------------------------------------------- */
+@media (max-width: 860px) {
+  .team-nav-btn,
+  .nav-hamburger,
+  .footer-social-btn,
+  .calc-submit-btn {
+    min-height: 44px;
+    min-width: 44px;
+  }
+
+  .nav-mobile-link {
+    min-height: 48px;
+    display: flex;
+    align-items: center;
+  }
+}
+
+/* -------------------------------------------------------
+   SECTION PADDING UTILITY - universal tightening
+   ------------------------------------------------------- */
+@media (max-width: 768px) {
+  .px-8 {
+    padding-left: 20px;
+    padding-right: 20px;
+  }
+
+  .py-32 {
+    padding-top: 64px;
+    padding-bottom: 64px;
+  }
+
+  .py-24 {
+    padding-top: 56px;
+    padding-bottom: 56px;
+  }
+}
+
+@media (max-width: 480px) {
+  .px-8 {
+    padding-left: 16px;
+    padding-right: 16px;
+  }
+
+  .py-32 {
+    padding-top: 48px;
+    padding-bottom: 48px;
+  }
+
+  .py-24 {
+    padding-top: 40px;
+    padding-bottom: 40px;
+  }
+
+  .py-20 {
+    padding-top: 40px;
+    padding-bottom: 40px;
+  }
+
+  .py-16 {
+    padding-top: 32px;
+    padding-bottom: 32px;
+  }
+}
+
+
+
+/* =====================================================
+   ANIMATED LOGO HERO (alh-*) COMPONENT STYLES
+   ===================================================== */
+
+.alh-section {
+  position: relative;
+  min-height: 100svh;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+  overflow: hidden;
+  background: #04070f;
+  padding: 0 16px;
+}
+
+/* Background video layer */
+.alh-video-bg {
+  position: absolute;
+  inset: 0;
+  z-index: 0;
+  overflow: hidden;
+}
+
+.alh-video-slide {
+  position: absolute;
+  inset: 0;
+  width: 100%;
+  height: 100%;
+  object-fit: cover;
+  opacity: 0;
+  transition: opacity 1.2s ease;
+}
+
+.alh-video-slide--active {
+  opacity: 1;
+}
+
+.alh-video-grid {
+  position: absolute;
+  inset: 0;
+  background-image:
+    linear-gradient(rgba(255, 255, 255, 0.03) 1px, transparent 1px),
+    linear-gradient(90deg, rgba(255, 255, 255, 0.03) 1px, transparent 1px);
+  background-size: 60px 60px;
+  pointer-events: none;
+}
+
+.alh-video-vignette {
+  position: absolute;
+  inset: 0;
+  background:
+    radial-gradient(ellipse 80% 60% at 50% 50%, transparent 40%, rgba(4, 7, 15, 0.80) 100%),
+    linear-gradient(to bottom, rgba(4, 7, 15, 0.5) 0%, transparent 20%, transparent 80%, rgba(4, 7, 15, 0.7) 100%);
+  pointer-events: none;
+}
+
+/* Glow backdrop behind logo */
+.alh-logo-wrap {
+  position: relative;
+  z-index: 10;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  gap: 0;
+  transition: transform 120ms ease-out;
+}
+
+.alh-glow-backdrop {
+  position: absolute;
+  inset: -60px -80px;
+  border-radius: 999px;
+  background: radial-gradient(ellipse 70% 50% at 50% 50%, rgba(52, 152, 219, 0.14), transparent 70%);
+  pointer-events: none;
+  transition: opacity 400ms ease;
+}
+
+.alh-glow-backdrop--hovered {
+  background: radial-gradient(ellipse 80% 60% at 50% 50%, rgba(52, 152, 219, 0.24), transparent 70%);
+}
+
+/* Particles */
+.alh-particles {
+  position: absolute;
+  inset: -80px;
+  pointer-events: none;
+}
+
+.alh-particle {
+  position: absolute;
+  border-radius: 999px;
+  background: rgba(52, 152, 219, 0.7);
+  box-shadow: 0 0 6px rgba(52, 152, 219, 0.5);
+  animation: alh-particle-drift 5s ease-in-out infinite;
+}
+
+@keyframes alh-particle-drift {
+  0%, 100% { transform: translate(0, 0);         opacity: 0.25; }
+  50%       { transform: translate(12px, -20px);  opacity: 0.80; }
+}
+
+/* SVG logo */
+.alh-svg {
+  width: clamp(280px, 62vw, 540px);
+  height: auto;
+  display: block;
+  transition: filter 400ms ease;
+  user-select: none;
+}
+
+.alh-svg--hovered {
+  filter: drop-shadow(0 0 32px rgba(52, 152, 219, 0.45));
+}
+
+/* Text elements */
+.alh-text-evoke {
+  transition: filter 400ms ease;
+}
+.alh-svg--hovered .alh-text-evoke {
+  filter: url(#logo-glow-strong);
+}
+
+.alh-text-hub {
+  transition: filter 400ms ease;
+}
+
+/* Tagline */
+.alh-tagline {
+  display: flex;
+  align-items: center;
+  gap: 12px;
+  font-family: var(--font-montserrat), Arial, sans-serif;
+  font-size: 11px;
+  font-weight: 700;
+  letter-spacing: 0.36em;
+  text-transform: uppercase;
+  color: rgba(255, 255, 255, 0.35);
+  margin: 10px 0 0;
+  white-space: nowrap;
+}
+
+.alh-tagline-line {
+  display: block;
+  height: 1px;
+  width: 40px;
+  background: rgba(255, 255, 255, 0.18);
+  flex-shrink: 0;
+}
+
+/* Video dots */
+.alh-video-dots {
+  display: flex;
+  gap: 6px;
+  margin-top: 18px;
+  justify-content: center;
+}
+
+.alh-dot {
+  width: 6px;
+  height: 6px;
+  border-radius: 999px;
+  background: rgba(255, 255, 255, 0.22);
+  border: none;
+  cursor: pointer;
+  padding: 0;
+  transition: width 250ms ease, background 250ms ease;
+}
+
+.alh-dot--active {
+  width: 18px;
+  background: #3498db;
+}
+
+/* CTA button */
+.alh-cta-btn {
+  position: relative;
+  z-index: 10;
+  margin-top: 40px;
+  display: inline-flex;
+  align-items: center;
+  gap: 10px;
+  border-radius: 999px;
+  border: 1px solid rgba(255, 255, 255, 0.15);
+  background: rgba(255, 255, 255, 0.06);
+  padding: 14px 28px;
+  font-family: var(--font-montserrat), Arial, sans-serif;
+  font-size: 13px;
+  font-weight: 700;
+  letter-spacing: 0.08em;
+  text-transform: uppercase;
+  color: #ffffff;
+  text-decoration: none;
+  backdrop-filter: blur(18px);
+  transition: border-color 250ms ease, background 250ms ease, transform 250ms ease;
+}
+
+.alh-cta-btn:hover {
+  border-color: rgba(52, 152, 219, 0.60);
+  background: rgba(52, 152, 219, 0.15);
+  transform: translateY(-2px);
+}
+
+/* ── Responsive tweaks ── */
+@media (max-width: 640px) {
+  .alh-svg {
+    width: clamp(220px, 78vw, 380px);
+  }
+
+  .alh-tagline {
+    font-size: 9px;
+    letter-spacing: 0.28em;
+    gap: 8px;
+  }
+
+  .alh-tagline-line {
+    width: 24px;
+  }
+
+  .alh-cta-btn {
+    padding: 12px 22px;
+    font-size: 12px;
+    margin-top: 28px;
+  }
+
+  /* Hide emoji decorations on small screens to avoid clutter */
+  .hero-emoji-deco {
+    display: none;
+  }
+}
+
+@media (max-width: 380px) {
+  .alh-svg {
+    width: clamp(200px, 88vw, 300px);
+  }
+
+  .alh-tagline {
+    font-size: 8px;
+    letter-spacing: 0.22em;
+  }
+
+  .alh-cta-btn {
+    padding: 10px 16px;
+    font-size: 11px;
+    margin-top: 20px;
+  }
+}
+
+
+
+/* =====================================================
+   HERO LOGO SECTION (page.tsx static hero)
+   ===================================================== */
+
+.hero-logo-section {
+  /* ensure full height even on mobile with address-bar awareness */
+  min-height: 100svh;
+  padding: 80px 16px 40px; /* top clearance for fixed navbar */
+}
+
+@media (max-width: 768px) {
+  .hero-logo-section {
+    padding: 80px 12px 32px;
+  }
+}
+
+@media (max-width: 480px) {
+  .hero-logo-section {
+    padding: 70px 8px 24px;
+  }
+
+  /* Hide side emojis on very small phones */
+  .hero-emoji-deco {
+    display: none;
+  }
+}
+
+/* =====================================================
+   ANIMATED LOGO HERO  (animated-logo-hero.tsx)
+   ===================================================== */
+
+.alh-section {
+  position: relative;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+  min-height: 100svh;
+  padding: 80px 16px 48px;
+  overflow: hidden;
+  background: #04070f;
+}
+
+/* ── Background video layer ── */
+.alh-video-bg {
+  position: absolute;
+  inset: 0;
+  z-index: 0;
+  overflow: hidden;
+}
+
+.alh-video-slide {
+  position: absolute;
+  inset: 0;
+  width: 100%;
+  height: 100%;
+  object-fit: cover;
+  opacity: 0;
+  transition: opacity 1.2s ease;
+  pointer-events: none;
+}
+
+.alh-video-slide--active {
+  opacity: 0.18;
+}
+
+.alh-video-grid {
+  position: absolute;
+  inset: 0;
+  background-image:
+    linear-gradient(rgba(255,255,255,0.025) 1px, transparent 1px),
+    linear-gradient(90deg, rgba(255,255,255,0.025) 1px, transparent 1px);
+  background-size: 64px 64px;
+  pointer-events: none;
+}
+
+.alh-video-vignette {
+  position: absolute;
+  inset: 0;
+  background: radial-gradient(ellipse 80% 80% at 50% 50%, transparent 30%, #04070f 100%);
+  pointer-events: none;
+}
+
+/* ── Logo wrapper ── */
+.alh-logo-wrap {
+  position: relative;
+  z-index: 1;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  gap: 0;
+  padding: 40px 56px 32px;
+  transition: transform 0.15s ease-out;
+}
+
+/* Glow backdrop blob */
+.alh-glow-backdrop {
+  position: absolute;
+  inset: -40px;
+  border-radius: 50%;
+  background: radial-gradient(ellipse 70% 60% at 50% 48%, rgba(52,152,219,0.18) 0%, rgba(98,0,255,0.12) 50%, transparent 80%);
+  filter: blur(40px);
+  transition: opacity 0.4s ease, transform 0.4s ease;
+  pointer-events: none;
+  opacity: 0.7;
+}
+
+.alh-glow-backdrop--hovered {
+  opacity: 1;
+  transform: scale(1.12);
+}
+
+/* ── Floating particles ── */
+.alh-particles {
+  position: absolute;
+  inset: 0;
+  pointer-events: none;
+  overflow: hidden;
+  border-radius: inherit;
+}
+
+.alh-particle {
+  position: absolute;
+  border-radius: 50%;
+  background: #3498db;
+  box-shadow: 0 0 6px rgba(52,152,219,0.8);
+  animation: alh-particle-float 5s ease-in-out infinite;
+}
+
+@keyframes alh-particle-float {
+  0%, 100% { transform: translate(0, 0) scale(1);   opacity: 0.4; }
+  33%       { transform: translate(8px, -16px) scale(1.3); opacity: 0.9; }
+  66%       { transform: translate(-6px, 10px) scale(0.8); opacity: 0.5; }
+}
+
+/* ── SVG logo ── */
+.alh-svg {
+  width: min(520px, 90vw);
+  height: auto;
+  overflow: visible;
+  transition: filter 0.4s ease, transform 0.4s ease;
+}
+
+.alh-svg--hovered {
+  filter: drop-shadow(0 0 24px rgba(52,152,219,0.5));
+  transform: scale(1.02);
+}
+
+.alh-text-evoke {
+  transition: filter 0.3s ease;
+}
+
+.alh-text-hub {
+  transition: filter 0.3s ease;
+}
+
+/* ── Tagline ── */
+.alh-tagline {
+  display: flex;
+  align-items: center;
+  gap: 14px;
+  font-family: var(--font-montserrat), Arial, sans-serif;
+  font-size: 11px;
+  font-weight: 700;
+  letter-spacing: 0.35em;
+  text-transform: uppercase;
+  color: rgba(255,255,255,0.45);
+  margin-top: 12px;
+}
+
+.alh-tagline-line {
+  display: block;
+  height: 1px;
+  width: 40px;
+  background: linear-gradient(90deg, transparent, rgba(52,152,219,0.6), transparent);
+}
+
+/* ── Video indicator dots ── */
+.alh-video-dots {
+  display: flex;
+  gap: 8px;
+  margin-top: 24px;
+}
+
+.alh-dot {
+  width: 6px;
+  height: 6px;
+  border-radius: 999px;
+  border: none;
+  background: rgba(255,255,255,0.2);
+  cursor: pointer;
+  transition: width 250ms ease, background 250ms ease;
+}
+
+.alh-dot--active {
+  width: 22px;
+  background: #3498db;
+  box-shadow: 0 0 8px rgba(52,152,219,0.7);
+}
+
+/* ── CTA button ── */
+.alh-cta-btn {
+  position: relative;
+  z-index: 1;
+  margin-top: 36px;
+  display: inline-flex;
+  align-items: center;
+  gap: 10px;
+  padding: 14px 28px;
+  border-radius: 999px;
+  border: 1px solid rgba(255,255,255,0.15);
+  background: rgba(255,255,255,0.06);
+  font-family: var(--font-montserrat), Arial, sans-serif;
+  font-size: 13px;
+  font-weight: 700;
+  color: #ffffff;
+  letter-spacing: 0.08em;
+  text-decoration: none;
+  backdrop-filter: blur(20px);
+  transition: border-color 0.3s ease, background 0.3s ease, transform 0.15s ease, box-shadow 0.3s ease;
+}
+
+.alh-cta-btn:hover {
+  border-color: rgba(52,152,219,0.6);
+  background: rgba(52,152,219,0.14);
+  transform: translateY(-2px);
+  box-shadow: 0 8px 32px rgba(52,152,219,0.22);
+}
+
+.alh-cta-btn:focus-visible {
+  outline: 2px solid #3498db;
+  outline-offset: 3px;
+}
+
+@media (max-width: 480px) {
+  .alh-section {
+    padding: 70px 8px 36px;
+  }
+
+  .alh-logo-wrap {
+    padding: 28px 20px 20px;
+  }
+}
+
+
+/* ═══════════════════════════════════════════════════════════════════
+   PHASE 2 — COMPREHENSIVE RESPONSIVE OVERHAUL
+   Complete mobile-first responsive system covering all breakpoints:
+   320px │ 480px │ 640px │ 768px │ 1024px │ 1440px │ 1920px
+   ═══════════════════════════════════════════════════════════════════ */
+
+/* ──────────────────────────────────────────────────────────────────
+   GLOBAL SAFETY GUARDS
+   ────────────────────────────────────────────────────────────────── */
+*, *::before, *::after {
+  box-sizing: border-box;
+}
+
+img, video, svg, iframe {
+  max-width: 100%;
+  height: auto;
+}
+
+section {
+  /* Prevent any single section from causing horizontal scroll */
+  overflow-x: clip;
+}
+
+/* Universal touch-action for all interactive elements */
+button, a, [role="button"], [role="tab"] {
+  touch-action: manipulation;
+}
+
+/* ──────────────────────────────────────────────────────────────────
+   FLUID TYPOGRAPHY SYSTEM — clamp() everywhere
+   ────────────────────────────────────────────────────────────────── */
+:root {
+  --fs-xs:    clamp(10px, 2.2vw, 12px);
+  --fs-sm:    clamp(12px, 2.8vw, 14px);
+  --fs-base:  clamp(14px, 3.2vw, 16px);
+  --fs-lg:    clamp(16px, 3.8vw, 20px);
+  --fs-xl:    clamp(20px, 4.5vw, 28px);
+  --fs-2xl:   clamp(24px, 5.5vw, 36px);
+  --fs-3xl:   clamp(28px, 6.5vw, 48px);
+  --fs-4xl:   clamp(32px, 7.5vw, 64px);
+  --fs-5xl:   clamp(36px, 8.5vw, 80px);
+  --space-xs: clamp(8px,  2vw,  16px);
+  --space-sm: clamp(12px, 3vw,  24px);
+  --space-md: clamp(20px, 4vw,  40px);
+  --space-lg: clamp(32px, 6vw,  64px);
+  --space-xl: clamp(48px, 8vw,  96px);
+}
+
+/* ──────────────────────────────────────────────────────────────────
+   MINIMUM TOUCH TARGET ENFORCEMENT (WCAG 2.5.5)
+   ────────────────────────────────────────────────────────────────── */
+@media (hover: none), (max-width: 1024px) {
+  .nav-hamburger,
+  .icon-button,
+  .team-nav-btn,
+  .stack-dot,
+  .team-dot,
+  .alh-dot,
+  .vt-play-ring,
+  .member-modal-close,
+  .pop-close,
+  .calc-cat-header,
+  .service-tile,
+  .nav-mobile-link,
+  .footer-social-btn,
+  .vid-action-btn,
+  .alh-cta-btn,
+  .calc-submit-btn,
+  .calc-download-btn,
+  .vid-channel-cta {
+    min-height: 44px;
+    min-width: 44px;
+  }
+
+  /* Service tiles specifically need taller touch area */
+  .service-tile {
+    min-height: 80px;
+  }
+
+  /* Video action tiny buttons — increase tap radius via padding */
+  .vid-action-btn {
+    padding: 10px;
+    width: auto;
+    height: auto;
+  }
+}
+
+/* ──────────────────────────────────────────────────────────────────
+   ULTRA-WIDE GUARDS (1920px+)
+   Cap content at sane max-widths on 4K / ultra-wide monitors
+   ────────────────────────────────────────────────────────────────── */
+@media (min-width: 1920px) {
+  .alh-svg {
+    width: min(640px, 35vw);
+  }
+
+  .stack-scene-wrap {
+    height: 620px;
+  }
+
+  .iso-stack-card {
+    width: 520px;
+  }
+
+  .vt-card {
+    width: 380px;
+    height: 214px;
+  }
+
+  .vid-channel-cta {
+    font-size: 16px;
+    padding: 16px 36px;
+  }
+}
+
+/* ──────────────────────────────────────────────────────────────────
+   ANIMATED LOGO HERO — fix white-space & video opacity from old block
+   ────────────────────────────────────────────────────────────────── */
+/* Override the old block's white-space: nowrap which causes tagline overflow at 320px */
+.alh-tagline {
+  white-space: normal;
+  text-align: center;
+  justify-content: center;
+}
+
+/* Ensure video background stays subtle regardless of which CSS block wins */
+.alh-video-slide--active {
+  opacity: 0.18 !important;
+}
+
+/* Ensure the dark overlay always sits on top of the video */
+.alh-section > .absolute.inset-0 {
+  z-index: 1;
+}
+.alh-logo-wrap {
+  z-index: 10;
+}
+.alh-cta-btn {
+  z-index: 10;
+}
+
+/* ──────────────────────────────────────────────────────────────────
+   NAVBAR — small screen refinements
+   ────────────────────────────────────────────────────────────────── */
+@media (max-width: 860px) {
+  /* Ensure hamburger always shows at 44px minimum */
+  .nav-hamburger {
+    width: 44px;
+    height: 44px;
+    border-radius: 12px;
+  }
+}
+
+@media (max-width: 480px) {
+  .site-nav {
+    padding: 0 14px;
+    height: 60px;
+  }
+
+  .nav-logo-wrap {
+    width: 88px;
+    height: 36px;
+  }
+
+  /* Prevent logo + hamburger from overlapping at 320px */
+  .nav-inner {
+    gap: 8px;
+  }
+
+  /* Mobile drawer adjusts to shorter navbar */
+  .nav-mobile-drawer {
+    top: 60px;
+  }
+}
+
+/* ──────────────────────────────────────────────────────────────────
+   ANIMATED LOGO HERO — additional small-phone refinements
+   ────────────────────────────────────────────────────────────────── */
+@media (max-width: 640px) {
+  /* SVG logo responsive - already in old block but reinforce */
+  .alh-svg {
+    width: clamp(240px, 80vw, 400px);
+  }
+
+  /* CTA button should never overflow its section */
+  .alh-cta-btn {
+    max-width: calc(100vw - 32px);
+    flex-wrap: wrap;
+    justify-content: center;
+    text-align: center;
+    padding: 12px 20px;
+    font-size: 11px;
+  }
+}
+
+@media (max-width: 380px) {
+  .alh-svg {
+    width: clamp(200px, 90vw, 280px);
+  }
+
+  .alh-tagline {
+    font-size: 8px;
+    gap: 6px;
+    letter-spacing: 0.2em;
+  }
+
+  .alh-tagline-line {
+    width: 20px;
+  }
+}
+
+/* ──────────────────────────────────────────────────────────────────
+   TEAM CAROUSEL — responsive refinements
+   ────────────────────────────────────────────────────────────────── */
+@media (max-width: 480px) {
+  /* Prevent team section heading from overflowing */
+  .team-section > div h2,
+  .team-section h2 {
+    font-size: clamp(24px, 8vw, 40px) !important;
+    line-height: 1.2;
+  }
+
+  /* Shrink team card click-hint font */
+  .team-card-click-hint {
+    font-size: 8px;
+    padding: 4px 8px 7px;
+  }
+}
+
+/* Member modal — responsive portrait */
+@media (max-width: 640px) {
+  .member-modal-portrait {
+    width: 180px;
+    height: 230px;
+    border-radius: 50% / 35%;
+  }
+
+  .member-modal-watermark {
+    display: none;
+  }
+
+  /* Skill pills — reduce spacing */
+  .member-modal-skills {
+    gap: 10px;
+  }
+
+  .member-skill-pill {
+    min-width: 56px;
+  }
+
+  .member-skill-icon-wrap {
+    width: 48px;
+    height: 48px;
+  }
+}
+
+/* ──────────────────────────────────────────────────────────────────
+   SERVICES GRID — heading and tile refinements
+   ────────────────────────────────────────────────────────────────── */
+@media (max-width: 640px) {
+  /* Section heading fluid */
+  #services h2 {
+    font-size: clamp(28px, 9vw, 44px) !important;
+  }
+
+  /* Description text */
+  #services p {
+    font-size: 14px;
+  }
+}
+
+@media (max-width: 480px) {
+  /* 2-col service grid refinements */
+  .service-tile {
+    padding: 16px 14px 12px;
+    min-height: 80px;
+  }
+
+  .service-tile-label {
+    font-size: 11px;
+  }
+
+  .service-tile-num {
+    font-size: 10px;
+  }
+}
+
+/* ──────────────────────────────────────────────────────────────────
+   VIDEOGRAPHY SECTION — mobile fixes
+   ────────────────────────────────────────────────────────────────── */
+/* Section heading fluid */
+.videography-title {
+  font-size: clamp(36px, 8vw, 80px);
+}
+
+/* Inner container safe padding */
+.videography-section > .relative.mx-auto {
+  padding-left: clamp(16px, 5vw, 64px);
+  padding-right: clamp(16px, 5vw, 64px);
+}
+
+@media (max-width: 768px) {
+  .videography-title {
+    font-size: clamp(32px, 10vw, 56px);
+  }
+
+  /* Remove the CSS rotation on video cards at tablet — looks broken */
+  .vid-grid > :nth-child(1),
+  .vid-grid > :nth-child(2),
+  .vid-grid > :nth-child(3),
+  .vid-grid > :nth-child(4),
+  .vid-grid > :nth-child(5) {
+    --card-rotate: 0deg !important;
+  }
+
+  /* Pill CTA full-width on small screens */
+  .vid-channel-cta {
+    width: 100%;
+    justify-content: center;
+  }
+}
+
+@media (max-width: 560px) {
+  .videography-title {
+    font-size: clamp(28px, 9vw, 44px);
+  }
+
+  /* On single column, CTA stays reasonable */
+  .vid-channel-cta {
+    font-size: 13px;
+    padding: 12px 20px;
+    gap: 8px;
+  }
+}
+
+/* ──────────────────────────────────────────────────────────────────
+   CLIENT REVIEWS — ISO STACK mobile scaling
+   The 3D stack uses JS-calculated pixel offsets that run off-screen.
+   We scale the entire scene container down so cards stay visible.
+   ────────────────────────────────────────────────────────────────── */
+@media (max-width: 640px) {
+  .stack-scene-wrap {
+    height: 440px;
+  }
+
+  /* Scale down the whole 3D scene — preserves the tilt effect */
+  .stack-scene {
+    transform: scale(0.82);
+    transform-origin: center 40%;
+  }
+
+  /* Reviews heading */
+  #reviews h2 {
+    font-size: clamp(26px, 8vw, 42px) !important;
+    max-width: 100% !important;
+  }
+}
+
+@media (max-width: 480px) {
+  .stack-scene-wrap {
+    height: 380px;
+  }
+
+  .stack-scene {
+    transform: scale(0.68);
+    transform-origin: center 35%;
+  }
+
+  /* ISO card inner content — reduce padding for smaller card */
+  .iso-card-inner {
+    padding: 18px 20px 16px;
+    gap: 10px;
+  }
+
+  /* Pop-out expanded card */
+  .pop-body {
+    grid-template-columns: 1fr !important;
+  }
+
+  .pop-avatar-wrap {
+    height: 260px !important;
+    min-height: 0 !important;
+  }
+}
+
+@media (max-width: 380px) {
+  .stack-scene-wrap {
+    height: 330px;
+  }
+
+  .stack-scene {
+    transform: scale(0.58);
+    transform-origin: center 30%;
+  }
+}
+
+/* Reviews heading row — stack on mobile */
+@media (max-width: 640px) {
+  .stack-section > .relative.mx-auto > div.mb-20 {
+    margin-bottom: 12px;
+  }
+
+  /* Navigation arrows next to counter — make them visible */
+  .stack-section .icon-button {
+    width: 44px;
+    height: 44px;
+  }
+}
+
+/* ──────────────────────────────────────────────────────────────────
+   VIDEO TICKER — touch device support
+   ────────────────────────────────────────────────────────────────── */
+/* Always show pause hint on touch so users know to tap */
+@media (hover: none) {
+  .vt-hint {
+    display: none; /* replace with touch hint below */
+  }
+
+  /* Show a static touch hint on touch devices */
+  .vt-wrap::after {
+    content: "Tap a clip to pause";
+    display: block;
+    text-align: center;
+    font-family: var(--font-poppins), Arial, sans-serif;
+    font-size: 11px;
+    color: rgba(255, 255, 255, 0.22);
+    letter-spacing: 0.06em;
+    padding: 8px 0;
+  }
+
+  /* On touch, cards should still be hittable */
+  .vt-card {
+    cursor: pointer;
+  }
+}
+
+@media (max-width: 480px) {
+  .vt-card {
+    width: 200px;
+    height: 112px;
+    border-radius: 10px;
+  }
+
+  .vt-fade {
+    width: 40px;
+  }
+
+  /* Tighter heading on mobile */
+  .vt-title {
+    font-size: clamp(26px, 9vw, 44px);
+    margin-bottom: 10px;
+  }
+
+  .vt-subtitle {
+    font-size: 13px;
+  }
+
+  /* Ticker section heading padding */
+  .vt-section > div.relative.mx-auto {
+    padding-top: 60px;
+    padding-bottom: 10px;
+  }
+}
+
+/* ──────────────────────────────────────────────────────────────────
+   COST CALCULATOR — mobile layout polish
+   ────────────────────────────────────────────────────────────────── */
+@media (max-width: 960px) {
+  /* Right panel full width when stacked */
+  .calc-grid {
+    grid-template-columns: 1fr;
+  }
+
+  .calc-right-panel {
+    position: static;
+    top: auto;
+  }
+
+  /* Summary card — reduce total display size */
+  .calc-total-display {
+    font-size: clamp(36px, 8vw, 52px);
+  }
+}
+
+@media (max-width: 640px) {
+  /* Form grid — 1 col on phones */
+  .calc-form-grid {
+    grid-template-columns: 1fr;
+  }
+
+  /* Category header text */
+  .calc-cat-label {
+    font-size: 12px;
+  }
+
+  /* Allow service descriptions to wrap */
+  .calc-service-desc {
+    white-space: normal;
+    word-break: break-word;
+  }
+
+  /* Summary card padding */
+  .calc-summary-card {
+    padding: 18px;
+  }
+
+  .calc-form {
+    padding: 18px;
+  }
+
+  /* Calculator section heading */
+  .calc-title {
+    font-size: clamp(28px, 9vw, 52px);
+  }
+}
+
+@media (max-width: 480px) {
+  .calc-title {
+    font-size: clamp(24px, 8.5vw, 40px);
+  }
+
+  /* Category accordion header tighter */
+  .calc-cat-header {
+    padding: 13px 14px;
+    gap: 10px;
+  }
+
+  /* Service rows tighter */
+  .calc-service-list {
+    padding: 6px 8px 8px;
+    gap: 4px;
+  }
+
+  .calc-service-row {
+    padding: 10px 10px;
+    gap: 10px;
+  }
+
+  /* Price column */
+  .calc-price-amount {
+    font-size: 13px;
+  }
+
+  /* Submit button */
+  .calc-submit-btn {
+    font-size: 12px;
+    padding: 14px 20px;
+  }
+
+  /* Download button full width */
+  .calc-download-btn {
+    width: 100%;
+    justify-content: center;
+  }
+}
+
+/* ──────────────────────────────────────────────────────────────────
+   FOOTER CTA BANNER — proper selectors (not brittle descendant targets)
+   ────────────────────────────────────────────────────────────────── */
+@media (max-width: 768px) {
+  .footer-cta-banner {
+    padding: 0;
+  }
+
+  /* Heading fluid */
+  .footer-cta-banner h2 {
+    font-size: clamp(26px, 8vw, 48px) !important;
+    word-break: break-word;
+    hyphens: auto;
+  }
+
+  /* CTA button stacks below heading */
+  .footer-cta-banner > .relative > div {
+    flex-direction: column;
+    align-items: flex-start;
+    gap: 24px;
+    padding: 48px 20px;
+  }
+}
+
+@media (max-width: 480px) {
+  .footer-cta-banner > .relative > div {
+    padding: 40px 16px;
+    gap: 20px;
+  }
+
+  .footer-cta-btn {
+    width: 100%;
+    justify-content: center;
+    font-size: 13px;
+    padding: 13px 24px;
+  }
+
+  /* Lime green accent text */
+  .footer-cta-highlight {
+    display: inline;
+  }
+}
+
+/* ──────────────────────────────────────────────────────────────────
+   MAIN FOOTER — responsive refinements
+   ────────────────────────────────────────────────────────────────── */
+@media (max-width: 640px) {
+  /* Ensure footer grid doesn't overflow at 2-col */
+  .site-footer > .relative > div {
+    gap: 28px;
+    padding: 48px 20px 40px;
+  }
+
+  /* Footer brand desc full width */
+  .footer-brand-desc {
+    max-width: 100%;
+    font-size: 13px;
+  }
+
+  /* Tighter column title */
+  .footer-col-title {
+    font-size: 13px;
+  }
+}
+
+@media (max-width: 480px) {
+  .site-footer > .relative > div {
+    grid-template-columns: 1fr !important;
+    padding: 40px 16px 32px;
+    gap: 24px;
+  }
+
+  /* Bottom bar */
+  .footer-bottom {
+    padding: 14px 0;
+  }
+
+  .footer-bottom > div {
+    padding-left: 16px !important;
+    padding-right: 16px !important;
+  }
+
+  /* Logo wrap */
+  .footer-logo-wrap {
+    width: 120px;
+    height: 50px;
+  }
+
+  /* Social buttons */
+  .footer-social-btn {
+    width: 40px;
+    height: 40px;
+  }
+}
+
+/* ──────────────────────────────────────────────────────────────────
+   PAGE SECTION HEADINGS — universal fluid system
+   All h2 headings across the site scale fluidly
+   ────────────────────────────────────────────────────────────────── */
+@media (max-width: 768px) {
+  /* Section eyebrow labels */
+  .font-heading.text-xs.uppercase {
+    font-size: 10px;
+    letter-spacing: 0.28em;
+  }
+
+  /* Body text in sections */
+  .font-body.text-base {
+    font-size: 14px;
+    line-height: 1.75;
+  }
+}
+
+/* ──────────────────────────────────────────────────────────────────
+   SCROLL-TO-TOP — mobile tightening
+   ────────────────────────────────────────────────────────────────── */
+@media (max-width: 480px) {
+  .scroll-top-btn {
+    bottom: 14px;
+    right: 14px;
+    width: 44px;
+    height: 44px;
+  }
+}
+
+/* ──────────────────────────────────────────────────────────────────
+   LANDSCAPE PHONE OVERRIDES
+   Devices like iPhone 14 in landscape: ~844×390px
+   ────────────────────────────────────────────────────────────────── */
+@media (max-height: 500px) and (orientation: landscape) {
+  /* Hero: reduce min-height so content is reachable */
+  .alh-section {
+    min-height: 100dvh;
+    padding-top: 64px;
+    padding-bottom: 24px;
+  }
+
+  /* Reduce SVG in landscape so it fits without scrolling */
+  .alh-svg {
+    width: clamp(180px, 55vh, 340px);
+  }
+
+  .alh-cta-btn {
+    margin-top: 16px;
+    padding: 10px 20px;
+    font-size: 11px;
+  }
+
+  /* Reduce navbar height slightly */
+  .site-nav {
+    height: 56px;
+  }
+
+  .nav-mobile-drawer {
+    top: 56px;
+  }
+
+  /* Team carousel smaller in landscape */
+  .team-stage {
+    height: 340px;
+    perspective: 800px;
+  }
+
+  /* ISO stack smaller in landscape */
+  .stack-scene-wrap {
+    height: 320px;
+  }
+}
+
+/* ──────────────────────────────────────────────────────────────────
+   FOCUS-VISIBLE — consistent ring across all interactive elements
+   ────────────────────────────────────────────────────────────────── */
+:focus-visible {
+  outline: 2px solid #3498db;
+  outline-offset: 2px;
+}
+
+/* Remove outline for mouse users only */
+:focus:not(:focus-visible) {
+  outline: none;
+}
+
+/* Prevent 100% width images in iso cards from stretching */
+.iso-stack-card img,
+.team-card img {
+  max-width: 100%;
+  height: 100%;
+  object-fit: cover;
+}

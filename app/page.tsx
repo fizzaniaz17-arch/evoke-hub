@@ -1,5 +1,5 @@
 import Image from "next/image";
-import { ArrowDown, Sparkles, Phone, MapPin, Mail } from "lucide-react";
+import { ArrowDown, Phone, MapPin, Mail } from "lucide-react";
 import ClientReviews from "@/components/client-reviews";
 import TeamCarousel from "@/components/team-carousel";
 import ServicesGrid from "@/components/services-grid";
@@ -8,20 +8,7 @@ import Navbar from "@/components/navbar";
 import ScrollToTop from "@/components/scroll-to-top";
 import CostCalculator from "@/components/cost-calculator";
 import VideoTicker from "@/components/video-ticker";
-
-/* Emoji faces scattered on the sides — purely decorative */
-const SIDE_EMOJIS = [
-  { emoji: "😎", top: "8%",  side: "left",  size: 72, opacity: 0.13, delay: "0s"   },
-  { emoji: "😂", top: "28%", side: "left",  size: 90, opacity: 0.10, delay: "1.2s" },
-  { emoji: "🤩", top: "52%", side: "left",  size: 64, opacity: 0.14, delay: "2.4s" },
-  { emoji: "😏", top: "72%", side: "left",  size: 80, opacity: 0.09, delay: "0.6s" },
-  { emoji: "😤", top: "88%", side: "left",  size: 56, opacity: 0.11, delay: "3.0s" },
-  { emoji: "🥶", top: "12%", side: "right", size: 80, opacity: 0.11, delay: "1.8s" },
-  { emoji: "😈", top: "32%", side: "right", size: 68, opacity: 0.13, delay: "0.4s" },
-  { emoji: "🤯", top: "56%", side: "right", size: 88, opacity: 0.10, delay: "2.0s" },
-  { emoji: "😤", top: "76%", side: "right", size: 60, opacity: 0.12, delay: "1.0s" },
-  { emoji: "🫡", top: "90%", side: "right", size: 72, opacity: 0.09, delay: "2.8s" },
-] as const;
+import AnimatedLogoHero from "@/components/animated-logo-hero";
 
 export default function Home() {
   return (
@@ -31,61 +18,7 @@ export default function Home() {
       <main className="min-h-screen overflow-hidden bg-[#04070F] text-white">
 
       {/* ══ HERO ══ */}
-      <section
-        className="hero-logo-section relative flex min-h-screen flex-col items-center justify-center overflow-hidden"
-        aria-label="Evoke Hub hero"
-      >
-        {/* Dark site background */}
-        <div className="absolute inset-0 bg-[#04070F]" aria-hidden="true" />
-
-        {/* Floating emoji decorations */}
-        {SIDE_EMOJIS.map((item, i) => (
-          <span
-            key={i}
-            className="hero-emoji-deco"
-            aria-hidden="true"
-            style={{
-              top: item.top,
-              [item.side]: "clamp(4px, 3vw, 52px)",
-              fontSize: item.size,
-              opacity: item.opacity,
-              animationDelay: item.delay,
-            }}
-          >
-            {item.emoji}
-          </span>
-        ))}
-
-        {/* ── Logo — centred naturally by flexbox ── */}
-        <div className="hero-logo-wrap relative z-10">
-          <Image
-            src="/assets/evoke-hub-logo.png"
-            alt="Evoke Hub"
-            width={1060}
-            height={730}
-            priority
-            className="hero-full-logo"
-          />
-          {/* Soft bottom gradient covers the "100" watermark */}
-          <div
-            className="absolute inset-x-0 bottom-0 pointer-events-none"
-            style={{ height: "18%", background: "linear-gradient(to top, #04070F 55%, transparent 100%)" }}
-            aria-hidden="true"
-          />
-        </div>
-
-        {/* Scroll CTA */}
-        <a
-          href="#team"
-          id="hero-cta"
-          className="relative z-10 mt-10 inline-flex items-center gap-3 rounded-full border border-white/15 bg-white/[0.06] px-7 py-3.5 font-heading text-sm font-semibold text-white backdrop-blur-xl transition-all duration-300 hover:border-[#3498DB]/60 hover:bg-[#3498DB]/15 focus:outline-none focus:ring-2 focus:ring-[#3498DB] focus:ring-offset-2 focus:ring-offset-[#04070F]"
-          aria-label="Explore our work"
-        >
-          <Sparkles className="h-4 w-4 text-[#3498DB]" />
-          Explore Our Work
-          <ArrowDown className="h-4 w-4 animate-bounce" />
-        </a>
-      </section>
+      <AnimatedLogoHero />
 
       {/* ══ MEET THE TEAM ══ */}
       <TeamCarousel />
