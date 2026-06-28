@@ -13,16 +13,38 @@ const SHOWCASE_VIDEOS = [
   "https://streamable.com/l/e03hi7/mp4-mobile.mp4",
 ];
 
-/* ── Particle data ── */
-const PARTICLES = Array.from({ length: 28 }, (_, i) => ({
-  id: i,
-  x: Math.random() * 100,
-  y: Math.random() * 100,
-  size: 1.5 + Math.random() * 3,
-  duration: 3 + Math.random() * 5,
-  delay: Math.random() * 6,
-  opacity: 0.3 + Math.random() * 0.6,
-}));
+/* ── Particle data — hardcoded so SSR and client produce identical HTML ── */
+const PARTICLES = [
+  { id:  0, x: 48.30, y: 28.31, size: 4.12, duration: 7.78, delay: 4.86, opacity: 0.35 },
+  { id:  1, x: 88.03, y: 91.83, size: 2.92, duration: 3.72, delay: 1.37, opacity: 0.47 },
+  { id:  2, x: 45.55, y: 97.55, size: 2.41, duration: 5.53, delay: 0.00, opacity: 0.49 },
+  { id:  3, x: 85.79, y: 65.74, size: 3.08, duration: 4.80, delay: 3.55, opacity: 0.30 },
+  { id:  4, x:  3.99, y: 35.67, size: 2.69, duration: 7.85, delay: 0.49, opacity: 0.62 },
+  { id:  5, x: 57.96, y: 93.95, size: 3.14, duration: 4.93, delay: 4.36, opacity: 0.62 },
+  { id:  6, x: 64.35, y: 76.93, size: 3.28, duration: 3.73, delay: 3.19, opacity: 0.59 },
+  { id:  7, x: 99.75, y: 36.82, size: 3.95, duration: 6.06, delay: 1.50, opacity: 0.60 },
+  { id:  8, x: 94.21, y: 41.71, size: 1.74, duration: 6.60, delay: 5.99, opacity: 0.89 },
+  { id:  9, x: 12.50, y: 49.66, size: 2.41, duration: 7.21, delay: 3.39, opacity: 0.81 },
+  { id: 10, x: 82.33, y: 12.00, size: 1.77, duration: 5.59, delay: 3.93, opacity: 0.67 },
+  { id: 11, x: 66.26, y: 23.99, size: 3.39, duration: 3.52, delay: 5.72, opacity: 0.47 },
+  { id: 12, x: 20.64, y: 56.93, size: 1.74, duration: 5.31, delay: 3.96, opacity: 0.75 },
+  { id: 13, x: 17.13, y: 18.09, size: 4.23, duration: 7.17, delay: 1.17, opacity: 0.43 },
+  { id: 14, x: 32.55, y: 54.60, size: 2.83, duration: 6.46, delay: 3.19, opacity: 0.46 },
+  { id: 15, x: 47.87, y: 30.11, size: 4.16, duration: 4.17, delay: 3.84, opacity: 0.35 },
+  { id: 16, x: 99.38, y: 57.38, size: 4.21, duration: 3.52, delay: 5.22, opacity: 0.70 },
+  { id: 17, x: 35.16, y: 12.80, size: 4.18, duration: 5.92, delay: 3.33, opacity: 0.56 },
+  { id: 18, x: 27.16, y: 49.56, size: 3.59, duration: 7.52, delay: 3.70, opacity: 0.63 },
+  { id: 19, x: 95.11, y: 18.33, size: 3.87, duration: 6.28, delay: 2.96, opacity: 0.47 },
+  { id: 20, x: 81.10, y: 93.22, size: 1.91, duration: 3.62, delay: 2.79, opacity: 0.82 },
+  { id: 21, x: 12.76, y: 24.23, size: 2.02, duration: 5.66, delay: 4.32, opacity: 0.89 },
+  { id: 22, x: 74.59, y: 67.66, size: 2.34, duration: 6.51, delay: 2.91, opacity: 0.75 },
+  { id: 23, x:  1.97, y: 47.62, size: 4.42, duration: 7.03, delay: 5.71, opacity: 0.50 },
+  { id: 24, x: 87.58, y:  9.97, size: 2.89, duration: 5.08, delay: 0.05, opacity: 0.71 },
+  { id: 25, x: 97.40, y: 67.11, size: 2.95, duration: 3.34, delay: 4.58, opacity: 0.75 },
+  { id: 26, x: 73.37, y: 17.26, size: 2.65, duration: 7.67, delay: 2.70, opacity: 0.76 },
+  { id: 27, x: 79.69, y: 46.60, size: 2.01, duration: 7.94, delay: 5.70, opacity: 0.67 },
+];
+
 
 export default function AnimatedLogoHero() {
   const [hovered, setHovered] = useState(false);
