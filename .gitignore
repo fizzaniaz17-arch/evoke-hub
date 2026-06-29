@@ -11,3 +11,7 @@ reviews-mobile.png
 
 # Environment — never commit real credentials
 .env.local
+
+# Quote data — contains PII, keep off version control
+data/quotes-db.json
+data/quotes-log.xlsx

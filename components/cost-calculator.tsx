@@ -31,6 +31,7 @@ export default function CostCalculator() {
   const [message, setMessage]   = useState("");
   const [status, setStatus]     = useState<Status>("idle");
   const [apiMsg, setApiMsg]     = useState("");
+  const [quoteId, setQuoteId]   = useState("");
 
   const toggleService = (id: string) =>
     setSelected(prev => ({ ...prev, [id]: !prev[id] }));
@@ -72,10 +73,13 @@ export default function CostCalculator() {
       const json = await res.json();
       if (!res.ok) throw new Error(json.error ?? "Failed");
       setStatus("success");
+      setQuoteId(json.quoteId ?? "");
       setApiMsg(
         json.dev
-          ? "Quote submitted! (Email sending requires SMTP setup in .env.local)"
-          : `Quote sent! Check ${email} for your detailed breakdown.`
+          ? `Quote saved! Reference: ${json.quoteId ?? ""} (Email sending requires SMTP setup in .env.local)`
+          : json.emailFailed
+          ? `Quote saved! Reference: ${json.quoteId ?? ""} — Our team will contact you within 24h.`
+          : `Quote sent! Check ${email} for your breakdown. Ref: ${json.quoteId ?? ""}`
       );
       setSelected({});
       setName(""); setEmail(""); setPhone(""); setCompany(""); setMessage("");
@@ -298,7 +302,17 @@ export default function CostCalculator() {
                     {status === "success"
                       ? <CheckCircle className="h-4 w-4 flex-shrink-0" />
                       : <AlertCircle className="h-4 w-4 flex-shrink-0" />}
-                    {apiMsg}
+                    <span>{apiMsg}</span>
+                    {status === "success" && quoteId && (
+                      <span style={{
+                        display: "inline-block", marginLeft: 6,
+                        fontFamily: "monospace", fontSize: 10, fontWeight: 700,
+                        background: "rgba(52,152,219,0.18)", border: "1px solid rgba(52,152,219,0.4)",
+                        borderRadius: 4, padding: "1px 6px", color: "#3498db",
+                      }}>
+                        {quoteId.slice(0, 8).toUpperCase()}
+                      </span>
+                    )}
                   </motion.div>
                 )}
               </AnimatePresence>

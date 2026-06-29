@@ -1,5 +1,8 @@
 import { NextRequest, NextResponse } from "next/server";
 import nodemailer from "nodemailer";
+import { v4 as uuidv4 } from "uuid";
+import { saveQuote, getAllQuotes, type QuoteRecord } from "@/lib/quotes-db";
+import { appendQuoteToExcel } from "@/lib/quotes-excel";
 
 export interface QuotePayload {
   name: string;
@@ -18,7 +21,7 @@ export interface QuotePayload {
 }
 
 /* ── build the HTML email bodies ── */
-function buildAdminEmail(data: QuotePayload): string {
+function buildAdminEmail(data: QuotePayload, quoteId: string): string {
   const rows = data.selectedServices
     .map(
       s => `
@@ -40,6 +43,7 @@ function buildAdminEmail(data: QuotePayload): string {
     <div style="background:linear-gradient(135deg,#0f2040,#0a1830);padding:32px 40px;border-bottom:2px solid #3498db;">
       <h1 style="margin:0;font-size:22px;font-weight:800;color:#ffffff;letter-spacing:0.05em;">🔔 NEW QUOTE REQUEST</h1>
       <p style="margin:8px 0 0;color:#3498db;font-size:13px;">Evoke Hub — Admin Notification</p>
+      <p style="margin:6px 0 0;font-size:11px;color:#506070;font-family:monospace;">Quote ID: ${quoteId}</p>
     </div>
     <!-- Client info -->
     <div style="padding:28px 40px;border-bottom:1px solid #1e2a3a;">
@@ -71,6 +75,10 @@ function buildAdminEmail(data: QuotePayload): string {
       <span style="font-size:16px;font-weight:700;color:#ffffff;">ESTIMATED TOTAL</span>
       <span style="font-size:24px;font-weight:900;color:#7ed957;">$${data.total.toLocaleString()}</span>
     </div>
+    <!-- Admin link -->
+    <div style="padding:20px 40px;text-align:center;border-top:1px solid #1e2a3a;">
+      <p style="margin:0;font-size:12px;color:#708090;">Manage this quote in the <a href="${process.env.SITE_URL ?? "http://localhost:3000"}/admin" style="color:#3498db;">Admin Dashboard</a></p>
+    </div>
     <!-- Footer -->
     <div style="padding:20px 40px;text-align:center;font-size:11px;color:#505870;">
       Evoke Hub Admin System &nbsp;·&nbsp; ${new Date().toLocaleString()}
@@ -80,7 +88,7 @@ function buildAdminEmail(data: QuotePayload): string {
 </html>`;
 }
 
-function buildClientEmail(data: QuotePayload): string {
+function buildClientEmail(data: QuotePayload, quoteId: string): string {
   const rows = data.selectedServices
     .map(
       s => `
@@ -108,10 +116,11 @@ function buildClientEmail(data: QuotePayload): string {
     <!-- Greeting -->
     <div style="padding:32px 40px;border-bottom:1px solid #1e2a3a;">
       <h2 style="margin:0 0 12px;font-size:20px;font-weight:700;color:#ffffff;">Hello, ${data.name}! 👋</h2>
-      <p style="margin:0;font-size:14px;line-height:1.75;color:#a0a8b8;">
+      <p style="margin:0 0 12px;font-size:14px;line-height:1.75;color:#a0a8b8;">
         Thank you for reaching out to Evoke Hub. We've received your quote request and our team will review it shortly.
         Below is a detailed summary of the services you've selected along with estimated pricing.
       </p>
+      <p style="margin:0;font-size:12px;color:#506070;">Your quote reference: <strong style="color:#3498db;font-family:monospace;">${quoteId}</strong></p>
     </div>
     <!-- Services breakdown -->
     <div style="padding:28px 40px;border-bottom:1px solid #1e2a3a;">
@@ -136,7 +145,7 @@ function buildClientEmail(data: QuotePayload): string {
       <ol style="margin:0;padding-left:20px;font-size:13px;line-height:2;color:#a0a8b8;">
         <li>Our team reviews your request within <strong style="color:#ffffff;">24–48 hours</strong></li>
         <li>We'll schedule a <strong style="color:#ffffff;">free discovery call</strong> to discuss your goals</li>
-        <li>A detailed proposal with timeline & scope will be sent to you</li>
+        <li>A detailed proposal with timeline &amp; scope will be sent to you</li>
         <li>Upon agreement, we kickstart your project with a dedicated account manager</li>
       </ol>
     </div>
@@ -164,7 +173,7 @@ export async function POST(req: NextRequest) {
   try {
     const data: QuotePayload = await req.json();
 
-    // Validate
+    // ── Validate ──────────────────────────────────────────────────────────────
     if (!data.name?.trim() || !data.email?.trim() || !data.selectedServices?.length) {
       return NextResponse.json({ error: "Missing required fields." }, { status: 400 });
     }
@@ -172,16 +181,43 @@ export async function POST(req: NextRequest) {
       return NextResponse.json({ error: "Invalid email address." }, { status: 400 });
     }
 
-    // Check SMTP config
+    // ── Persist to DB ─────────────────────────────────────────────────────────
+    const quoteId = uuidv4();
+    const quoteRecord: QuoteRecord = {
+      quoteId,
+      submittedAt: new Date().toISOString(),
+      status:      "new",
+      adminNote:   "",
+      name:        data.name.trim(),
+      email:       data.email.trim(),
+      phone:       data.phone?.trim() ?? "",
+      company:     data.company?.trim() ?? "",
+      message:     data.message?.trim() ?? "",
+      selectedServices: data.selectedServices,
+      total:       data.total,
+    };
+
+    saveQuote(quoteRecord);
+
+    // ── Generate / update Excel ───────────────────────────────────────────────
+    let excelBuffer: Buffer | null = null;
+    try {
+      const allQuotes = getAllQuotes();
+      excelBuffer = await appendQuoteToExcel(quoteRecord, allQuotes);
+    } catch (xlErr) {
+      console.error("[Quote API] Excel generation failed:", xlErr);
+    }
+
+    // ── Check SMTP config ─────────────────────────────────────────────────────
     const { SMTP_HOST, SMTP_PORT, SMTP_USER, SMTP_PASS, ADMIN_EMAIL, FROM_NAME, FROM_EMAIL } = process.env;
 
     if (!SMTP_HOST || !SMTP_USER || !SMTP_PASS) {
-      // Dev mode — log and return success without sending
-      console.warn("[Quote API] SMTP not configured — email not sent. Payload:", JSON.stringify(data, null, 2));
+      console.warn("[Quote API] SMTP not configured — email not sent. Quote ID:", quoteId);
       return NextResponse.json({
         success: true,
         dev: true,
-        message: "Quote received (SMTP not configured — set up .env.local to enable emails).",
+        quoteId,
+        message: "Quote saved! (Email sending requires SMTP setup in .env.local)",
       });
     }
 
@@ -194,26 +230,46 @@ export async function POST(req: NextRequest) {
 
     const fromAddress = `"${FROM_NAME ?? "Evoke Hub"}" <${FROM_EMAIL ?? SMTP_USER}>`;
 
-    // Send both emails concurrently
-    await Promise.all([
-      // 1. Admin notification
-      transporter.sendMail({
-        from: fromAddress,
-        to: ADMIN_EMAIL ?? SMTP_USER,
-        replyTo: data.email,
-        subject: `🔔 New Quote — ${data.name} | $${data.total.toLocaleString()} | ${data.selectedServices.length} service(s)`,
-        html: buildAdminEmail(data),
-      }),
-      // 2. Customer confirmation
-      transporter.sendMail({
-        from: fromAddress,
-        to: data.email,
-        subject: `Your Evoke Hub Quote — $${data.total.toLocaleString()} Estimated Total`,
-        html: buildClientEmail(data),
-      }),
-    ]);
+    // Build attachments — include Excel if we have it
+    const attachments: nodemailer.SendMailOptions["attachments"] = excelBuffer
+      ? [{
+          filename: `Evoke-Hub-Quotes-${new Date().toISOString().slice(0, 10)}.xlsx`,
+          content:  excelBuffer,
+          contentType: "application/vnd.openxmlformats-officedocument.spreadsheetml.sheet",
+        }]
+      : [];
 
-    return NextResponse.json({ success: true, message: "Quote sent successfully." });
+    // Send both emails concurrently
+    try {
+      await Promise.all([
+        // 1. Admin notification (with Excel attachment)
+        transporter.sendMail({
+          from:        fromAddress,
+          to:          ADMIN_EMAIL ?? SMTP_USER,
+          replyTo:     data.email,
+          subject:     `🔔 New Quote — ${data.name} | $${data.total.toLocaleString()} | ${data.selectedServices.length} service(s)`,
+          html:        buildAdminEmail(data, quoteId),
+          attachments,
+        }),
+        // 2. Customer confirmation
+        transporter.sendMail({
+          from:    fromAddress,
+          to:      data.email,
+          subject: `Your Evoke Hub Quote — $${data.total.toLocaleString()} Estimated Total`,
+          html:    buildClientEmail(data, quoteId),
+        }),
+      ]);
+      return NextResponse.json({ success: true, quoteId, message: "Quote sent successfully." });
+    } catch (mailErr) {
+      // Quote already saved — return partial success so the frontend shows the reference ID
+      console.error("[Quote API] Email send failed (quote already saved):", mailErr);
+      return NextResponse.json({
+        success: true,
+        quoteId,
+        emailFailed: true,
+        message: "Quote saved! Email delivery failed — our team will contact you shortly.",
+      });
+    }
   } catch (err: unknown) {
     console.error("[Quote API] Error:", err);
     const message = err instanceof Error ? err.message : "Unknown error";
