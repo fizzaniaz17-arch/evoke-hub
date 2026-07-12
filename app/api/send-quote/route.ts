@@ -1,5 +1,5 @@
 import { NextRequest, NextResponse } from "next/server";
-import nodemailer from "nodemailer";
+import { Resend } from "resend";
 import { v4 as uuidv4 } from "uuid";
 import { saveQuote, getAllQuotes, type QuoteRecord } from "@/lib/quotes-db";
 import { appendQuoteToExcel } from "@/lib/quotes-excel";
@@ -208,30 +208,32 @@ export async function POST(req: NextRequest) {
       console.error("[Quote API] Excel generation failed:", xlErr);
     }
 
-    // ── Check SMTP config ─────────────────────────────────────────────────────
-    const { SMTP_HOST, SMTP_PORT, SMTP_USER, SMTP_PASS, ADMIN_EMAIL, FROM_NAME, FROM_EMAIL } = process.env;
+    // ── Check Resend API key ──────────────────────────────────────────────────
+    const RESEND_API_KEY = process.env.RESEND_API_KEY;
 
-    if (!SMTP_HOST || !SMTP_USER || !SMTP_PASS) {
-      console.warn("[Quote API] SMTP not configured — email not sent. Quote ID:", quoteId);
+    if (!RESEND_API_KEY || RESEND_API_KEY === "re_paste_your_key_here") {
+      console.warn("[Quote API] Resend API key not configured — email not sent. Quote ID:", quoteId);
       return NextResponse.json({
         success: true,
         dev: true,
         quoteId,
-        message: "Quote saved! (Email sending requires SMTP setup in .env.local)",
+        message: "Quote saved! (Email sending requires RESEND_API_KEY in .env.local)",
       });
     }
 
-    const transporter = nodemailer.createTransport({
-      host: SMTP_HOST,
-      port: Number(SMTP_PORT ?? 587),
-      secure: process.env.SMTP_SECURE === "true",
-      auth: { user: SMTP_USER, pass: SMTP_PASS },
-    });
+    const resend = new Resend(RESEND_API_KEY);
 
-    const fromAddress = `"${FROM_NAME ?? "Evoke Hub"}" <${FROM_EMAIL ?? SMTP_USER}>`;
+    const fromAddress = `${process.env.FROM_NAME ?? "Evoke Hub"} <${process.env.FROM_EMAIL ?? "onboarding@resend.dev"}>`;
+    const adminTo = process.env.ADMIN_EMAIL ?? "delivered@resend.dev";
+
+    console.log("[Quote API] Sending emails via Resend:");
+    console.log("  from:      ", fromAddress);
+    console.log("  admin to:  ", adminTo);
+    console.log("  client to: ", data.email);
 
     // Build attachments — include Excel if we have it
-    const attachments: nodemailer.SendMailOptions["attachments"] = excelBuffer
+    type ResendAttachment = { filename: string; content: Buffer; contentType: string };
+    const attachments: ResendAttachment[] = excelBuffer
       ? [{
           filename: `Evoke-Hub-Quotes-${new Date().toISOString().slice(0, 10)}.xlsx`,
           content:  excelBuffer,
@@ -239,37 +241,54 @@ export async function POST(req: NextRequest) {
         }]
       : [];
 
-    // Send both emails concurrently
-    try {
-      await Promise.all([
-        // 1. Admin notification (with Excel attachment)
-        transporter.sendMail({
-          from:        fromAddress,
-          to:          ADMIN_EMAIL ?? SMTP_USER,
-          replyTo:     data.email,
-          subject:     `🔔 New Quote — ${data.name} | $${data.total.toLocaleString()} | ${data.selectedServices.length} service(s)`,
-          html:        buildAdminEmail(data, quoteId),
-          attachments,
-        }),
-        // 2. Customer confirmation
-        transporter.sendMail({
-          from:    fromAddress,
-          to:      data.email,
-          subject: `Your Evoke Hub Quote — $${data.total.toLocaleString()} Estimated Total`,
-          html:    buildClientEmail(data, quoteId),
-        }),
-      ]);
-      return NextResponse.json({ success: true, quoteId, message: "Quote sent successfully." });
-    } catch (mailErr) {
-      // Quote already saved — return partial success so the frontend shows the reference ID
-      console.error("[Quote API] Email send failed (quote already saved):", mailErr);
-      return NextResponse.json({
-        success: true,
-        quoteId,
-        emailFailed: true,
-        message: "Quote saved! Email delivery failed — our team will contact you shortly.",
-      });
+    // ── Send admin notification ────────────────────────────────────────────────
+    const adminResult = await resend.emails.send({
+      from:        fromAddress,
+      to:          [adminTo],
+      reply_to:    data.email,
+      subject:     `🔔 New Quote — ${data.name} | $${data.total.toLocaleString()} | ${data.selectedServices.length} service(s)`,
+      html:        buildAdminEmail(data, quoteId),
+      attachments,
+    });
+
+    if (adminResult.error) {
+      console.error("[Quote API] Admin email FAILED:", JSON.stringify(adminResult.error, null, 2));
+    } else {
+      console.log("[Quote API] Admin email sent ✓ id:", adminResult.data?.id);
     }
+
+    // ── Send customer confirmation ─────────────────────────────────────────────
+    // Resend sandbox restriction: without a verified domain, emails can only be
+    // delivered to the account owner's address (adminTo). We route the client
+    // confirmation through the admin inbox with reply_to = client's address so
+    // the admin can forward/reply instantly. Once a domain is verified on
+    // resend.com/domains, remove the `to: [adminTo]` workaround and restore
+    // `to: [data.email]`.
+    const clientEmailTo = adminTo; // ← change to data.email after domain verification
+    const clientResult = await resend.emails.send({
+      from:     fromAddress,
+      to:       [clientEmailTo],
+      reply_to: data.email,
+      subject:  `[FORWARD TO CLIENT] Quote for ${data.name} <${data.email}> — $${data.total.toLocaleString()}`,
+      html:     buildClientEmail(data, quoteId),
+    });
+
+    if (clientResult.error) {
+      console.error("[Quote API] Client email FAILED:", JSON.stringify(clientResult.error, null, 2));
+    } else {
+      console.log("[Quote API] Client email sent ✓ id:", clientResult.data?.id, `(routed to admin — forward to ${data.email})`);
+    }
+
+    const emailFailed = !!(adminResult.error && clientResult.error);
+    return NextResponse.json({
+      success: true,
+      quoteId,
+      emailFailed,
+      message: emailFailed
+        ? "Quote saved! Email delivery failed — our team will contact you shortly."
+        : "Quote sent successfully.",
+    });
+
   } catch (err: unknown) {
     console.error("[Quote API] Error:", err);
     const message = err instanceof Error ? err.message : "Unknown error";

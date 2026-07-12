@@ -373,9 +373,28 @@ function MemberModal({ member, onClose }: { member: Member; onClose: () => void 
 ───────────────────────────────────────── */
 const CARD_COUNT = TEAM_MEMBERS.length;
 const ANGLE_STEP = 360 / CARD_COUNT;
-const BASE_RADIUS = 420;
+
+/* Pick a 3-D ring radius that keeps cards inside the viewport */
+function useRadius() {
+  const [radius, setRadius] = useState(420);
+  useEffect(() => {
+    const calc = () => {
+      const w = window.innerWidth;
+      if (w <= 420)  setRadius(170);
+      else if (w <= 640)  setRadius(220);
+      else if (w <= 900)  setRadius(300);
+      else if (w <= 1100) setRadius(360);
+      else                setRadius(420);
+    };
+    calc();
+    window.addEventListener("resize", calc);
+    return () => window.removeEventListener("resize", calc);
+  }, []);
+  return radius;
+}
 
 export default function TeamCarousel() {
+  const BASE_RADIUS = useRadius();
   const [activeIndex, setActiveIndex] = useState(0);
   const [isDragging, setIsDragging]   = useState(false);
   const [isHovered, setIsHovered]     = useState(false);
@@ -559,18 +578,7 @@ export default function TeamCarousel() {
           </button>
         </div>
 
-        {/* Active member spotlight — fixed height so nothing collapses */}
-        <div className="relative z-10 mx-auto mt-12 max-w-sm text-center" style={{ height: 100 }}>
-          {TEAM_MEMBERS.map((m, idx) => (
-            <div key={m.id} className="team-spotlight"
-              style={{ opacity: idx === activeIndex ? 1 : 0, pointerEvents: idx === activeIndex ? "auto" : "none" }}
-              aria-hidden={idx !== activeIndex}>
-              <p className="font-heading text-2xl font-semibold text-white">{m.name}</p>
-              <p className="mt-1 font-body text-sm" style={{ color: m.accentColor }}>{m.occupation}</p>
-              <p className="mt-2 font-body text-sm text-[#A1A1AA]">{m.spec}</p>
-            </div>
-          ))}
-        </div>
+
       </section>
 
       {/* Member Detail Modal — rendered outside section, inside fragment */}

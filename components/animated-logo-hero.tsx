@@ -104,8 +104,8 @@ export default function AnimatedLogoHero() {
         <div className="alh-video-vignette" />
       </div>
 
-      {/* Dark base */}
-      <div className="absolute inset-0 bg-[#04070F]/65" aria-hidden="true" />
+      {/* Dark base — minimal overlay so showcase video shines through */}
+      <div className="absolute inset-0 bg-[#04070F]/15" aria-hidden="true" />
 
 
 
