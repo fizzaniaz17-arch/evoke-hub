@@ -5,21 +5,18 @@ import { SERVICE_PORTFOLIO } from "@/data/services-portfolio";
 import ServicePortfolioModal from "./service-portfolio-modal";
 
 const SERVICES = [
-  { id: 1,  label: "Social Media" },
-  { id: 2,  label: "E-Commerce" },
-  { id: 3,  label: "Google Ads" },
-  { id: 4,  label: "Branding" },
-  { id: 5,  label: "SEO & SMM" },
-  { id: 6,  label: "Marketing" },
-  { id: 7,  label: "Web Design" },
-  { id: 8,  label: "Photography" },
-  { id: 9,  label: "Videography" },
-  { id: 10, label: "Sound Effects" },
-  { id: 11, label: "Graphic Design" },
-  { id: 12, label: "Mobile App" },
-  { id: 13, label: "Entertainment" },
-  { id: 14, label: "UI / UX Design" },
-  { id: 15, label: "Art & Taste" },
+  { id: 1,  label: "Social Media",    img: "/assets/services/svc_social_media.png" },
+  { id: 2,  label: "E-Commerce",      img: "/assets/services/svc_ecommerce.png" },
+  { id: 3,  label: "Google Ads",      img: "/assets/services/service_google_ads.png" },
+  { id: 4,  label: "Branding",        img: "/assets/services/service_branding.png" },
+  { id: 5,  label: "SEO & SMM",       img: "/assets/services/service_seo_smm.png" },
+  { id: 6,  label: "Marketing",       img: "/assets/services/service_marketing.png" },
+  { id: 7,  label: "Web Design",      img: "/assets/services/service_web_design.png" },
+  { id: 8,  label: "Photography",     img: "/assets/services/service_photography.png" },
+  { id: 9,  label: "Videography",     img: "/assets/services/service_videography.png" },
+  { id: 10, label: "Graphic Design",  img: "/assets/services/service_graphic_design.png" },
+  { id: 11, label: "Content Creation",img: "/assets/services/service_marketing.png" },
+  { id: 12, label: "Video Editing",   img: "/assets/services/service_videography.png" },
 ];
 
 export default function ServicesGrid() {
@@ -67,7 +64,7 @@ export default function ServicesGrid() {
               <span className="services-heading-grad">Services</span>
             </h2>
             <p className="mx-auto mt-5 max-w-xl font-body text-base leading-8 text-[#A1A1AA]">
-              From strategy to execution — 15 specialisations built to elevate every dimension of your brand.
+              From strategy to execution — 12 specialisations built to elevate every dimension of your brand.
             </p>
             {/* Subtle hint for users */}
             <p className="mt-3 font-body text-xs text-[#3498DB]/60 tracking-widest uppercase">
@@ -75,7 +72,7 @@ export default function ServicesGrid() {
             </p>
           </div>
 
-          {/* 5 × 3 Tile grid */}
+          {/* 4 × 3 Tile grid */}
           <div
             className="services-grid"
             role="tablist"
@@ -92,12 +89,9 @@ export default function ServicesGrid() {
                   id={`service-tab-${svc.id}`}
                   onClick={() => openPortfolio(svc.id)}
                   className={`service-tile${isActive ? " service-tile--active" : ""}`}
+                  style={{ "--tile-bg": `url('${svc.img}')` } as React.CSSProperties}
                 >
-                  {/* Number watermark */}
-                  <span className="service-tile-num" aria-hidden="true">
-                    {String(svc.id).padStart(2, "0")}.
-                  </span>
-                  {/* Label */}
+                  {/* Label — centered by parent flexbox */}
                   <span className="service-tile-label">{svc.label}</span>
                   {/* Glow border */}
                   <span className="service-tile-glow" aria-hidden="true" />

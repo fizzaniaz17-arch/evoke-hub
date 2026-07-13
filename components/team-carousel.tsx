@@ -9,46 +9,46 @@ import { X } from "lucide-react";
 const SkillIcons: Record<string, React.FC<{ className?: string }>> = {
   Figma: ({ className }) => (
     <svg className={className} viewBox="0 0 38 57" fill="none">
-      <path d="M19 28.5a9.5 9.5 0 1 1 19 0 9.5 9.5 0 0 1-19 0z" fill="#1ABCFE"/>
-      <path d="M0 47.5A9.5 9.5 0 0 1 9.5 38H19v9.5a9.5 9.5 0 0 1-19 0z" fill="#0ACF83"/>
-      <path d="M19 0v19h9.5a9.5 9.5 0 0 0 0-19H19z" fill="#FF7262"/>
-      <path d="M0 9.5A9.5 9.5 0 0 0 9.5 19H19V0H9.5A9.5 9.5 0 0 0 0 9.5z" fill="#F24E1E"/>
-      <path d="M0 28.5A9.5 9.5 0 0 0 9.5 38H19V19H9.5A9.5 9.5 0 0 0 0 28.5z" fill="#A259FF"/>
+      <path d="M19 28.5a9.5 9.5 0 1 1 19 0 9.5 9.5 0 0 1-19 0z" fill="#1ABCFE" />
+      <path d="M0 47.5A9.5 9.5 0 0 1 9.5 38H19v9.5a9.5 9.5 0 0 1-19 0z" fill="#0ACF83" />
+      <path d="M19 0v19h9.5a9.5 9.5 0 0 0 0-19H19z" fill="#FF7262" />
+      <path d="M0 9.5A9.5 9.5 0 0 0 9.5 19H19V0H9.5A9.5 9.5 0 0 0 0 9.5z" fill="#F24E1E" />
+      <path d="M0 28.5A9.5 9.5 0 0 0 9.5 38H19V19H9.5A9.5 9.5 0 0 0 0 28.5z" fill="#A259FF" />
     </svg>
   ),
   Blender: ({ className }) => (
     <svg className={className} viewBox="0 0 24 24" fill="currentColor">
-      <path d="M6.47 9.8A5.62 5.62 0 0 0 4 14.5a5.55 5.55 0 0 0 5.5 5.5 5.62 5.62 0 0 0 4.7-2.47L7.73 9.8H6.47zm5.55-1.55a5.58 5.58 0 0 1 2 .37l-2.47-3.6a.83.83 0 0 0-1.38 0l-4.24 6.18a5.54 5.54 0 0 1 6.09-2.95zm3.36 2.46a5.5 5.5 0 0 1-4.87 7.79H20a.84.84 0 0 0 .69-1.32l-5.31-6.47z"/>
+      <path d="M6.47 9.8A5.62 5.62 0 0 0 4 14.5a5.55 5.55 0 0 0 5.5 5.5 5.62 5.62 0 0 0 4.7-2.47L7.73 9.8H6.47zm5.55-1.55a5.58 5.58 0 0 1 2 .37l-2.47-3.6a.83.83 0 0 0-1.38 0l-4.24 6.18a5.54 5.54 0 0 1 6.09-2.95zm3.36 2.46a5.5 5.5 0 0 1-4.87 7.79H20a.84.84 0 0 0 .69-1.32l-5.31-6.47z" />
     </svg>
   ),
   HTML5: ({ className }) => (
     <svg className={className} viewBox="0 0 24 24" fill="currentColor">
-      <path d="M1.5 0h21l-1.91 21.563L11.977 24l-8.565-2.438L1.5 0zm7.031 9.75l-.232-2.718 10.059.003.23-2.622L5.412 4.41l.698 8.01h9.126l-.326 3.426-2.91.804-2.955-.81-.188-2.11H6.248l.33 4.171L12 19.351l5.379-1.443.744-8.157H8.531z"/>
+      <path d="M1.5 0h21l-1.91 21.563L11.977 24l-8.565-2.438L1.5 0zm7.031 9.75l-.232-2.718 10.059.003.23-2.622L5.412 4.41l.698 8.01h9.126l-.326 3.426-2.91.804-2.955-.81-.188-2.11H6.248l.33 4.171L12 19.351l5.379-1.443.744-8.157H8.531z" />
     </svg>
   ),
   Bootstrap: ({ className }) => (
     <svg className={className} viewBox="0 0 24 24" fill="currentColor">
-      <path d="M11.77 11.24H9.956V8.202h2.152c1.15 0 1.82.55 1.82 1.493 0 .92-.588 1.546-2.158 1.546zm.324 1.146H9.956v3.638h2.242c1.673 0 2.37-.588 2.37-1.82 0-1.214-.773-1.818-2.474-1.818zM24 11.39v1.218C24 18.9 18.9 24 12.61 24H11.39C5.1 24 0 18.9 0 12.61v-1.218C0 5.1 5.1 0 11.39 0h1.218C18.9 0 24 5.1 24 11.39zm-6.734.623c0-1.2-.498-2.212-1.47-2.858.648-.532 1.04-1.3 1.04-2.22 0-1.842-1.35-2.994-3.486-2.994H7.956v12h5.56c2.272 0 3.75-1.184 3.75-3.928z"/>
+      <path d="M11.77 11.24H9.956V8.202h2.152c1.15 0 1.82.55 1.82 1.493 0 .92-.588 1.546-2.158 1.546zm.324 1.146H9.956v3.638h2.242c1.673 0 2.37-.588 2.37-1.82 0-1.214-.773-1.818-2.474-1.818zM24 11.39v1.218C24 18.9 18.9 24 12.61 24H11.39C5.1 24 0 18.9 0 12.61v-1.218C0 5.1 5.1 0 11.39 0h1.218C18.9 0 24 5.1 24 11.39zm-6.734.623c0-1.2-.498-2.212-1.47-2.858.648-.532 1.04-1.3 1.04-2.22 0-1.842-1.35-2.994-3.486-2.994H7.956v12h5.56c2.272 0 3.75-1.184 3.75-3.928z" />
     </svg>
   ),
   JavaScript: ({ className }) => (
     <svg className={className} viewBox="0 0 24 24" fill="currentColor">
-      <path d="M0 0h24v24H0V0zm22.034 18.276c-.175-1.095-.888-2.015-3.003-2.873-.736-.345-1.554-.585-1.797-1.14-.091-.33-.105-.51-.046-.705.15-.646.915-.84 1.515-.66.39.12.75.42.976.9 1.034-.676 1.755-1.125 1.755-1.125-.27-.42-.404-.601-.586-.78-.63-.705-1.469-1.065-2.834-1.034l-.705.089c-.676.165-1.32.525-1.71 1.005-1.14 1.291-.811 3.541.569 4.471 1.365 1.02 3.361 1.244 3.616 2.205.24 1.17-.87 1.545-1.966 1.41-.811-.18-1.26-.586-1.755-1.336l-1.83 1.051c.21.48.45.689.81 1.109 1.74 1.756 6.09 1.666 6.871-1.004.029-.09.24-.705.074-1.65l.046.067zm-8.983-7.245h-2.248c0 1.938-.009 3.864-.009 5.805 0 1.232.063 2.363-.138 2.711-.33.689-1.18.601-1.566.48-.396-.196-.597-.466-.83-.855-.063-.105-.11-.196-.127-.196l-1.825 1.125c.305.63.75 1.172 1.324 1.517.855.51 2.004.675 3.207.405.783-.226 1.458-.691 1.811-1.411.51-.93.402-2.07.397-3.346.012-2.054 0-4.109 0-6.179l.004-.056z"/>
+      <path d="M0 0h24v24H0V0zm22.034 18.276c-.175-1.095-.888-2.015-3.003-2.873-.736-.345-1.554-.585-1.797-1.14-.091-.33-.105-.51-.046-.705.15-.646.915-.84 1.515-.66.39.12.75.42.976.9 1.034-.676 1.755-1.125 1.755-1.125-.27-.42-.404-.601-.586-.78-.63-.705-1.469-1.065-2.834-1.034l-.705.089c-.676.165-1.32.525-1.71 1.005-1.14 1.291-.811 3.541.569 4.471 1.365 1.02 3.361 1.244 3.616 2.205.24 1.17-.87 1.545-1.966 1.41-.811-.18-1.26-.586-1.755-1.336l-1.83 1.051c.21.48.45.689.81 1.109 1.74 1.756 6.09 1.666 6.871-1.004.029-.09.24-.705.074-1.65l.046.067zm-8.983-7.245h-2.248c0 1.938-.009 3.864-.009 5.805 0 1.232.063 2.363-.138 2.711-.33.689-1.18.601-1.566.48-.396-.196-.597-.466-.83-.855-.063-.105-.11-.196-.127-.196l-1.825 1.125c.305.63.75 1.172 1.324 1.517.855.51 2.004.675 3.207.405.783-.226 1.458-.691 1.811-1.411.51-.93.402-2.07.397-3.346.012-2.054 0-4.109 0-6.179l.004-.056z" />
     </svg>
   ),
   "After Effects": ({ className }) => (
     <svg className={className} viewBox="0 0 24 24" fill="currentColor">
-      <path d="M0 0h24v24H0zm13.5 9.41c-.3-.9-.6-1.86-.87-2.7h-.03c-.24.84-.51 1.8-.81 2.7l-.51 1.62h2.73zM23.99 5v14c0 2.76-2.24 5-5 5H5c-2.76 0-5-2.24-5-5V5c0-2.76 2.24-5 5-5h13.99c2.76 0 5 2.24 5 5zM9.63 15.57L8.91 13.2H5.79l-.69 2.37H3.45L6.36 7.5h2.1l2.94 8.07zm9.12 0h-1.62l-.03-.9c-.51.69-1.26 1.05-2.22 1.05-1.77 0-3.18-1.47-3.18-3.57s1.44-3.57 3.18-3.57c.9 0 1.65.36 2.16.99V7.5H18.75z"/>
+      <path d="M0 0h24v24H0zm13.5 9.41c-.3-.9-.6-1.86-.87-2.7h-.03c-.24.84-.51 1.8-.81 2.7l-.51 1.62h2.73zM23.99 5v14c0 2.76-2.24 5-5 5H5c-2.76 0-5-2.24-5-5V5c0-2.76 2.24-5 5-5h13.99c2.76 0 5 2.24 5 5zM9.63 15.57L8.91 13.2H5.79l-.69 2.37H3.45L6.36 7.5h2.1l2.94 8.07zm9.12 0h-1.62l-.03-.9c-.51.69-1.26 1.05-2.22 1.05-1.77 0-3.18-1.47-3.18-3.57s1.44-3.57 3.18-3.57c.9 0 1.65.36 2.16.99V7.5H18.75z" />
     </svg>
   ),
   "Three.js": ({ className }) => (
     <svg className={className} viewBox="0 0 24 24" fill="currentColor">
-      <path d="M.38 0L4.98 24l14.12-5.25L24 0zm5.94 4.34l9.82-.01-1.17 3.49-6.44.01zm8.36 7.55l-5.56.01.42 2.97 4.4-1.63zm-6.23 5.98L7.27 9.26l3.67-.01 1.88 7.01z"/>
+      <path d="M.38 0L4.98 24l14.12-5.25L24 0zm5.94 4.34l9.82-.01-1.17 3.49-6.44.01zm8.36 7.55l-5.56.01.42 2.97 4.4-1.63zm-6.23 5.98L7.27 9.26l3.67-.01 1.88 7.01z" />
     </svg>
   ),
   Photoshop: ({ className }) => (
     <svg className={className} viewBox="0 0 24 24" fill="currentColor">
-      <path d="M0 0h24v24H0zm14.979 7.499h-1.5V14.5h1.5c2.003 0 3-1.017 3-3.017 0-1.998-.997-2.984-3-2.984zM23.99 5v14c0 2.76-2.24 5-5 5H5c-2.76 0-5-2.24-5-5V5c0-2.76 2.24-5 5-5h13.99c2.76 0 5 2.24 5 5zM6.63 13.97c.705.705 1.72.963 2.845.963.96 0 1.8-.24 2.4-.71v-1.79H9.875v1.11c-.27.12-.615.15-.96.15-.96 0-1.59-.75-1.59-1.95 0-1.14.6-1.95 1.56-1.95.57 0 .99.21 1.32.63l.84-.78C10.68 9.57 9.93 9.3 9 9.3c-1.695 0-2.865 1.185-2.865 2.895 0 .69.195 1.305.495 1.775zm8.349-6.471h-3.022v8.007h1.652V14h1.523c2.003 0 3.166-1.063 3.166-3.246 0-2.1-1.093-3.228-3.319-3.228z"/>
+      <path d="M0 0h24v24H0zm14.979 7.499h-1.5V14.5h1.5c2.003 0 3-1.017 3-3.017 0-1.998-.997-2.984-3-2.984zM23.99 5v14c0 2.76-2.24 5-5 5H5c-2.76 0-5-2.24-5-5V5c0-2.76 2.24-5 5-5h13.99c2.76 0 5 2.24 5 5zM6.63 13.97c.705.705 1.72.963 2.845.963.96 0 1.8-.24 2.4-.71v-1.79H9.875v1.11c-.27.12-.615.15-.96.15-.96 0-1.59-.75-1.59-1.95 0-1.14.6-1.95 1.56-1.95.57 0 .99.21 1.32.63l.84-.78C10.68 9.57 9.93 9.3 9 9.3c-1.695 0-2.865 1.185-2.865 2.895 0 .69.195 1.305.495 1.775zm8.349-6.471h-3.022v8.007h1.652V14h1.523c2.003 0 3.166-1.063 3.166-3.246 0-2.1-1.093-3.228-3.319-3.228z" />
     </svg>
   ),
 };
@@ -65,6 +65,7 @@ const TEAM_MEMBERS = [
     glowColor: "rgba(255,140,0,0.55)",
     tag: "Sage Mode",
     image: "/assets/anime-naruto.png",
+    portrait: "/assets/portrait-kai.png",
     expertise: "Brand Strategy & Visual Systems",
     bornIn: "Osaka, Japan",
     dateOfBirth: "14 March 1992",
@@ -74,12 +75,12 @@ const TEAM_MEMBERS = [
     bio: "Award-winning creative director with 12+ years forging brand identities that cut through noise. Kai blends cultural nuance with strategic precision to build visual systems that endure.",
     socials: { ig: "#", be: "#", li: "#", fb: "#" },
     skills: [
-      { name: "Figma",         pct: 98, icon: "Figma"         },
-      { name: "Photoshop",     pct: 96, icon: "Photoshop"     },
+      { name: "Figma", pct: 98, icon: "Figma" },
+      { name: "Photoshop", pct: 96, icon: "Photoshop" },
       { name: "After Effects", pct: 90, icon: "After Effects" },
-      { name: "Three.js",      pct: 75, icon: "Three.js"      },
-      { name: "HTML5",         pct: 82, icon: "HTML5"         },
-      { name: "JavaScript",    pct: 78, icon: "JavaScript"    },
+      { name: "Three.js", pct: 75, icon: "Three.js" },
+      { name: "HTML5", pct: 82, icon: "HTML5" },
+      { name: "JavaScript", pct: 78, icon: "JavaScript" },
     ],
   },
   {
@@ -93,6 +94,7 @@ const TEAM_MEMBERS = [
     glowColor: "rgba(0,200,255,0.55)",
     tag: "Water Breathing",
     image: "/assets/anime-tanjiro.png",
+    portrait: "/assets/portrait-zara.png",
     expertise: "UI/UX & Interaction Design",
     bornIn: "Shanghai, China",
     dateOfBirth: "07 August 1995",
@@ -102,12 +104,12 @@ const TEAM_MEMBERS = [
     bio: "Zara architects human-centred interfaces that balance beauty with usability. Her design systems have powered products used by millions across fintech and SaaS.",
     socials: { ig: "#", be: "#", li: "#", fb: "#" },
     skills: [
-      { name: "Figma",         pct: 100, icon: "Figma"         },
-      { name: "HTML5",         pct: 95,  icon: "HTML5"         },
-      { name: "JavaScript",    pct: 88,  icon: "JavaScript"    },
-      { name: "After Effects", pct: 92,  icon: "After Effects" },
-      { name: "Photoshop",     pct: 85,  icon: "Photoshop"     },
-      { name: "Three.js",      pct: 70,  icon: "Three.js"      },
+      { name: "Figma", pct: 100, icon: "Figma" },
+      { name: "HTML5", pct: 95, icon: "HTML5" },
+      { name: "JavaScript", pct: 88, icon: "JavaScript" },
+      { name: "After Effects", pct: 92, icon: "After Effects" },
+      { name: "Photoshop", pct: 85, icon: "Photoshop" },
+      { name: "Three.js", pct: 70, icon: "Three.js" },
     ],
   },
   {
@@ -121,6 +123,7 @@ const TEAM_MEMBERS = [
     glowColor: "rgba(74,222,128,0.55)",
     tag: "Humanity's Strongest",
     image: "/assets/anime-levi.png",
+    portrait: "/assets/portrait-ryuu.png",
     expertise: "Full-Stack & WebGL",
     bornIn: "Tokyo, Japan",
     dateOfBirth: "22 November 1990",
@@ -130,12 +133,12 @@ const TEAM_MEMBERS = [
     bio: "Ryuu builds the scaffolding that makes impossible ideas ship. From pixel-perfect 3D scenes to high-throughput APIs, he engineers with the precision of a surgeon.",
     socials: { ig: "#", be: "#", li: "#", fb: "#" },
     skills: [
-      { name: "JavaScript",    pct: 100, icon: "JavaScript"    },
-      { name: "Three.js",      pct: 97,  icon: "Three.js"      },
-      { name: "HTML5",         pct: 99,  icon: "HTML5"         },
-      { name: "Bootstrap",     pct: 88,  icon: "Bootstrap"     },
-      { name: "Figma",         pct: 72,  icon: "Figma"         },
-      { name: "After Effects", pct: 65,  icon: "After Effects" },
+      { name: "JavaScript", pct: 100, icon: "JavaScript" },
+      { name: "Three.js", pct: 97, icon: "Three.js" },
+      { name: "HTML5", pct: 99, icon: "HTML5" },
+      { name: "Bootstrap", pct: 88, icon: "Bootstrap" },
+      { name: "Figma", pct: 72, icon: "Figma" },
+      { name: "After Effects", pct: 65, icon: "After Effects" },
     ],
   },
   {
@@ -149,6 +152,7 @@ const TEAM_MEMBERS = [
     glowColor: "rgba(34,197,94,0.55)",
     tag: "Three-Sword Style",
     image: "/assets/anime-zoro.png",
+    portrait: "/assets/portrait-akira.png",
     expertise: "Brand Positioning & GTM",
     bornIn: "Seoul, South Korea",
     dateOfBirth: "30 May 1991",
@@ -158,11 +162,11 @@ const TEAM_MEMBERS = [
     bio: "Akira dissects markets with ruthless clarity and builds growth strategies that compound. She's steered five startups from obscurity to market leadership.",
     socials: { ig: "#", be: "#", li: "#", fb: "#" },
     skills: [
-      { name: "Figma",         pct: 78, icon: "Figma"         },
-      { name: "Photoshop",     pct: 82, icon: "Photoshop"     },
-      { name: "HTML5",         pct: 70, icon: "HTML5"         },
-      { name: "JavaScript",    pct: 65, icon: "JavaScript"    },
-      { name: "Bootstrap",     pct: 75, icon: "Bootstrap"     },
+      { name: "Figma", pct: 78, icon: "Figma" },
+      { name: "Photoshop", pct: 82, icon: "Photoshop" },
+      { name: "HTML5", pct: 70, icon: "HTML5" },
+      { name: "JavaScript", pct: 65, icon: "JavaScript" },
+      { name: "Bootstrap", pct: 75, icon: "Bootstrap" },
       { name: "After Effects", pct: 80, icon: "After Effects" },
     ],
   },
@@ -177,6 +181,7 @@ const TEAM_MEMBERS = [
     glowColor: "rgba(163,230,53,0.55)",
     tag: "One For All",
     image: "/assets/anime-deku.png",
+    portrait: "/assets/portrait-mia.png",
     expertise: "Motion Design & VFX",
     bornIn: "Kyoto, Japan",
     dateOfBirth: "18 January 1994",
@@ -187,11 +192,11 @@ const TEAM_MEMBERS = [
     socials: { ig: "#", be: "#", li: "#", fb: "#" },
     skills: [
       { name: "After Effects", pct: 100, icon: "After Effects" },
-      { name: "Blender",       pct: 95,  icon: "Blender"       },
-      { name: "Figma",         pct: 80,  icon: "Figma"         },
-      { name: "Photoshop",     pct: 90,  icon: "Photoshop"     },
-      { name: "JavaScript",    pct: 60,  icon: "JavaScript"    },
-      { name: "Three.js",      pct: 72,  icon: "Three.js"      },
+      { name: "Blender", pct: 95, icon: "Blender" },
+      { name: "Figma", pct: 80, icon: "Figma" },
+      { name: "Photoshop", pct: 90, icon: "Photoshop" },
+      { name: "JavaScript", pct: 60, icon: "JavaScript" },
+      { name: "Three.js", pct: 72, icon: "Three.js" },
     ],
   },
   {
@@ -205,6 +210,7 @@ const TEAM_MEMBERS = [
     glowColor: "rgba(129,140,248,0.55)",
     tag: "Six Eyes",
     image: "/assets/anime-gojo.png",
+    portrait: "/assets/portrait-luna.png",
     expertise: "3D & Realtime Rendering",
     bornIn: "Busan, South Korea",
     dateOfBirth: "03 October 1993",
@@ -214,22 +220,27 @@ const TEAM_MEMBERS = [
     bio: "Luna sculpts impossible worlds in three dimensions. Her realtime shaders and photorealistic renders have become the visual benchmark clients bring to every brief.",
     socials: { ig: "#", be: "#", li: "#", fb: "#" },
     skills: [
-      { name: "Blender",       pct: 100, icon: "Blender"       },
-      { name: "Three.js",      pct: 95,  icon: "Three.js"      },
-      { name: "Figma",         pct: 85,  icon: "Figma"         },
-      { name: "After Effects", pct: 88,  icon: "After Effects" },
-      { name: "JavaScript",    pct: 81,  icon: "JavaScript"    },
-      { name: "Photoshop",     pct: 89,  icon: "Photoshop"     },
+      { name: "Blender", pct: 100, icon: "Blender" },
+      { name: "Three.js", pct: 95, icon: "Three.js" },
+      { name: "Figma", pct: 85, icon: "Figma" },
+      { name: "After Effects", pct: 88, icon: "After Effects" },
+      { name: "JavaScript", pct: 81, icon: "JavaScript" },
+      { name: "Photoshop", pct: 89, icon: "Photoshop" },
     ],
   },
 ];
 
 type Member = typeof TEAM_MEMBERS[number];
 
-/* ─────────────────────────────────────────
-   Member Detail Modal
-───────────────────────────────────────── */
+const INFO_ICONS: Record<string, React.ReactNode> = {
+  "BORN IN":   <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="1.8" strokeLinecap="round" strokeLinejoin="round"><path d="M21 10c0 7-9 13-9 13s-9-6-9-13a9 9 0 0 1 18 0z"/><circle cx="12" cy="10" r="3"/></svg>,
+  "EDUCATION": <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="1.8" strokeLinecap="round" strokeLinejoin="round"><path d="M22 10v6M2 10l10-5 10 5-10 5z"/><path d="M6 12v5c3 3 9 3 12 0v-5"/></svg>,
+  "AWARD":     <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="1.8" strokeLinecap="round" strokeLinejoin="round"><circle cx="12" cy="8" r="6"/><path d="M15.477 12.89 17 22l-5-3-5 3 1.523-9.11"/></svg>,
+};
+
 function MemberModal({ member, onClose }: { member: Member; onClose: () => void }) {
+  const modalRef = useRef<HTMLDivElement>(null);
+
   useEffect(() => {
     const handler = (e: KeyboardEvent) => { if (e.key === "Escape") onClose(); };
     window.addEventListener("keydown", handler);
@@ -240,6 +251,26 @@ function MemberModal({ member, onClose }: { member: Member; onClose: () => void 
     };
   }, [onClose]);
 
+  const handleMouseMove = (e: React.MouseEvent<HTMLDivElement>) => {
+    if (!modalRef.current) return;
+    const rect = modalRef.current.getBoundingClientRect();
+    const x = ((e.clientX - rect.left) / rect.width  - 0.5) * 5;
+    const y = ((e.clientY - rect.top)  / rect.height - 0.5) * -3;
+    modalRef.current.style.setProperty("--tiltX", `${y}deg`);
+    modalRef.current.style.setProperty("--tiltY", `${x}deg`);
+  };
+  const handleMouseLeave = () => {
+    if (!modalRef.current) return;
+    modalRef.current.style.setProperty("--tiltX", "0deg");
+    modalRef.current.style.setProperty("--tiltY", "0deg");
+  };
+
+  const infoRows = [
+    { label: "BORN IN",   value: member.bornIn   },
+    { label: "EDUCATION", value: member.education },
+    { label: "AWARD",     value: member.award2    },
+  ];
+
   return (
     <>
       {/* Backdrop */}
@@ -248,120 +279,139 @@ function MemberModal({ member, onClose }: { member: Member; onClose: () => void 
         initial={{ opacity: 0 }}
         animate={{ opacity: 1 }}
         exit={{ opacity: 0 }}
-        transition={{ duration: 0.22 }}
+        transition={{ duration: 0.25 }}
         onClick={onClose}
         aria-hidden="true"
       />
 
-      {/* Modal */}
+      {/* Modal shell */}
       <motion.div
+        ref={modalRef}
         className="member-modal"
         role="dialog"
         aria-modal="true"
         aria-label={`${member.name} profile`}
-        initial={{ opacity: 0, scale: 0.88, y: 48 }}
+        initial={{ opacity: 0, scale: 0.88, y: 60 }}
         animate={{ opacity: 1, scale: 1, y: 0 }}
-        exit={{ opacity: 0, scale: 0.90, y: 30 }}
-        transition={{ type: "spring", stiffness: 110, damping: 22, mass: 0.8 }}
-        style={{ "--member-accent": member.accentColor, "--member-glow": member.glowColor } as React.CSSProperties}
+        exit={{ opacity: 0, scale: 0.92, y: 30 }}
+        transition={{ type: "spring", stiffness: 95, damping: 18, mass: 0.9 }}
+        style={{
+          "--member-accent": member.accentColor,
+          "--member-glow":   member.glowColor,
+          "--tiltX": "0deg",
+          "--tiltY": "0deg",
+        } as React.CSSProperties}
+        onMouseMove={handleMouseMove}
+        onMouseLeave={handleMouseLeave}
       >
-        {/* Close */}
+        {/* Close button */}
         <button className="member-modal-close" onClick={onClose} aria-label="Close profile">
           <X className="h-5 w-5" />
         </button>
 
-        {/* Accent stripe */}
-        <div className="member-modal-stripe" style={{ background: member.accentColor }} />
+        {/* ── 2-column body: portrait | info ── */}
+        <div className="mmp-body">
 
-        <div className="member-modal-inner">
-          {/* Name watermark */}
-          <div className="member-modal-watermark" aria-hidden="true">
-            {member.name.split(" ")[0].toUpperCase()}
-          </div>
+          {/* LEFT — Portrait card */}
+          <div className="mmp-portrait-col">
+            <div className="mmp-glow-disk" aria-hidden="true" />
+            <div className="mmp-portrait-card">
+              {/* Rotating spark/orb sweeping around the border */}
+              <div className="mmp-spark-track" aria-hidden="true" />
+              {/* Animated neon border */}
+              <div className="mmp-neon-left"   aria-hidden="true" />
+              <div className="mmp-neon-right"  aria-hidden="true" />
+              <div className="mmp-neon-top"    aria-hidden="true" />
+              <div className="mmp-neon-bottom" aria-hidden="true" />
+              <div className="mmp-corner mmp-corner--tl" aria-hidden="true" />
+              <div className="mmp-corner mmp-corner--tr" aria-hidden="true" />
+              <div className="mmp-corner mmp-corner--bl" aria-hidden="true" />
+              <div className="mmp-corner mmp-corner--br" aria-hidden="true" />
 
-          {/* Hero: stats | portrait | stats */}
-          <div className="member-modal-hero">
-            {/* LEFT */}
-            <div className="member-modal-stats member-modal-stats--left">
-              {[
-                { label: "EXPERTISE",    value: member.expertise    },
-                { label: "DATE OF BIRTH",value: member.dateOfBirth  },
-                { label: "BEST DESIGN",  value: member.award1       },
-              ].map(s => (
-                <div key={s.label} className="member-stat-card">
-                  <span className="member-stat-label">{s.label}</span>
-                  <span className="member-stat-value">{s.value}</span>
-                </div>
-              ))}
-            </div>
-
-            {/* CENTER portrait */}
-            <div className="member-modal-portrait-wrap">
-              <div
-                className="member-modal-portrait"
-                style={{ boxShadow: `0 0 0 3px ${member.accentColor}55, 0 0 60px ${member.glowColor}, 0 0 120px ${member.glowColor.replace("0.55","0.25")}` }}
-              >
-                <Image src={member.image} alt={member.name} fill sizes="280px" className="object-cover object-top" priority />
+              {/* Real portrait photo */}
+              <div className="mmp-portrait-frame">
+                <Image
+                  src={member.portrait}
+                  alt={member.name}
+                  fill
+                  sizes="260px"
+                  className="object-cover object-top"
+                  priority
+                />
+                <div className="mmp-portrait-fade" aria-hidden="true" />
               </div>
-              <p className="member-modal-name">{member.name}</p>
-              <p className="member-modal-role" style={{ color: member.accentColor }}>{member.occupation}</p>
-              <p className="member-modal-bio">{member.bio}</p>
-            </div>
 
-            {/* RIGHT */}
-            <div className="member-modal-stats member-modal-stats--right">
-              {[
-                { label: "BORN IN",   value: member.bornIn    },
-                { label: "EDUCATION", value: member.education  },
-                { label: "AWARD",     value: member.award2     },
-              ].map(s => (
-                <div key={s.label} className="member-stat-card">
-                  <span className="member-stat-label">{s.label}</span>
-                  <span className="member-stat-value">{s.value}</span>
+              {/* Name + role at card bottom */}
+              <div className="mmp-portrait-identity">
+                <p className="mmp-portrait-name">{member.name.toUpperCase()}</p>
+                <p className="mmp-portrait-role" style={{ color: member.accentColor }}>
+                  {member.occupation.toUpperCase()}
+                </p>
+              </div>
+            </div>
+          </div>
+
+          {/* RIGHT — Info cards + socials */}
+          <div className="mmp-info-col">
+            {infoRows.map((row) => (
+              <div
+                key={row.label}
+                className="mmp-info-card"
+                style={{ "--card-accent": member.accentColor } as React.CSSProperties}
+              >
+                <div className="mmp-info-card-icon" style={{ color: member.accentColor }}>
+                  {INFO_ICONS[row.label]}
                 </div>
+                <div className="mmp-info-card-text">
+                  <span className="mmp-info-card-label" style={{ color: member.accentColor }}>
+                    {row.label}
+                  </span>
+                  <span className="mmp-info-card-value">{row.value}</span>
+                </div>
+              </div>
+            ))}
+
+            {/* Social icons */}
+            <div className="mmp-socials">
+              {[
+                { label: "Instagram", href: member.socials.ig, path: <><rect x="2" y="2" width="20" height="20" rx="5" stroke="currentColor" strokeWidth="2" fill="none"/><circle cx="12" cy="12" r="4" stroke="currentColor" strokeWidth="2" fill="none"/><circle cx="17.5" cy="6.5" r="1" fill="currentColor"/></> },
+                { label: "Behance",   href: member.socials.be, path: <path d="M7.5 5.5h3.5c1.5 0 2.5.8 2.5 2.1 0 .9-.5 1.6-1.3 1.9.9.3 1.5 1 1.5 2.1 0 1.5-1.1 2.4-2.8 2.4H7.5V5.5zm1.5 3.4h1.9c.7 0 1.1-.4 1.1-.9 0-.6-.4-.9-1.1-.9H9v1.8zm0 3.5h2.1c.8 0 1.3-.4 1.3-1.1 0-.6-.5-1-1.3-1H9v2.1zm7.2-1.2c.1 1 .8 1.5 1.7 1.5.6 0 1-.2 1.3-.7h1.4c-.4 1.2-1.5 2-2.8 2-1.9 0-3-1.3-3-3.1 0-1.7 1.1-3.1 3-3.1 2 0 3 1.5 2.8 3.4h-4.4zm2.7-1.8c-.1-.8-.7-1.3-1.4-1.3-.8 0-1.3.5-1.4 1.3h2.8zm-3.4-3.4h3.5v.9H15.5V6z"/> },
+                { label: "LinkedIn",  href: member.socials.li, path: <><path d="M16 8a6 6 0 0 1 6 6v7h-4v-7a2 2 0 0 0-4 0v7H10v-7a6 6 0 0 1 6-6zM2 9h4v12H2z"/><circle cx="4" cy="4" r="2"/></> },
+                { label: "Facebook",  href: member.socials.fb, path: <path d="M18 2h-3a5 5 0 0 0-5 5v3H7v4h3v8h4v-8h3l1-4h-4V7a1 1 0 0 1 1-1h3z"/> },
+              ].map(s => (
+                <a key={s.label} href={s.href} className="mmp-social-btn" aria-label={s.label}
+                   style={{ "--btn-accent": member.accentColor } as React.CSSProperties}>
+                  <svg width="16" height="16" viewBox="0 0 24 24" fill="currentColor" aria-hidden="true">{s.path}</svg>
+                </a>
               ))}
             </div>
           </div>
+        </div>
 
-          {/* Socials */}
-          <div className="member-modal-socials">
-            {[
-              { label: "Instagram", href: member.socials.ig, path: <><rect x="2" y="2" width="20" height="20" rx="5" stroke="currentColor" strokeWidth="2" fill="none"/><circle cx="12" cy="12" r="4" stroke="currentColor" strokeWidth="2" fill="none"/><circle cx="17.5" cy="6.5" r="1" fill="currentColor"/></> },
-              { label: "Behance",   href: member.socials.be, path: <path d="M7.5 5.5h3.5c1.5 0 2.5.8 2.5 2.1 0 .9-.5 1.6-1.3 1.9.9.3 1.5 1 1.5 2.1 0 1.5-1.1 2.4-2.8 2.4H7.5V5.5zm1.5 3.4h1.9c.7 0 1.1-.4 1.1-.9 0-.6-.4-.9-1.1-.9H9v1.8zm0 3.5h2.1c.8 0 1.3-.4 1.3-1.1 0-.6-.5-1-1.3-1H9v2.1zm7.2-1.2c.1 1 .8 1.5 1.7 1.5.6 0 1-.2 1.3-.7h1.4c-.4 1.2-1.5 2-2.8 2-1.9 0-3-1.3-3-3.1 0-1.7 1.1-3.1 3-3.1 2 0 3 1.5 2.8 3.4h-4.4zm2.7-1.8c-.1-.8-.7-1.3-1.4-1.3-.8 0-1.3.5-1.4 1.3h2.8zm-3.4-3.4h3.5v.9H15.5V6z"/> },
-              { label: "LinkedIn",  href: member.socials.li, path: <><path d="M16 8a6 6 0 0 1 6 6v7h-4v-7a2 2 0 0 0-4 0v7H10v-7a6 6 0 0 1 6-6zM2 9h4v12H2z"/><circle cx="4" cy="4" r="2"/></> },
-              { label: "Facebook",  href: member.socials.fb, path: <path d="M18 2h-3a5 5 0 0 0-5 5v3H7v4h3v8h4v-8h3l1-4h-4V7a1 1 0 0 1 1-1h3z"/> },
-            ].map(s => (
-              <a key={s.label} href={s.href} className="member-social-btn" aria-label={s.label}
-                 style={{ "--btn-accent": member.accentColor } as React.CSSProperties}>
-                <svg width="16" height="16" viewBox="0 0 24 24" fill="currentColor" aria-hidden="true">{s.path}</svg>
-              </a>
-            ))}
-          </div>
-
-          {/* Skills */}
-          <div className="member-modal-skills">
-            {member.skills.map((skill) => {
-              const Icon = SkillIcons[skill.icon];
-              return (
-                <div key={skill.name} className="member-skill-pill" style={{ "--pill-accent": member.accentColor } as React.CSSProperties}>
-                  <div className="member-skill-icon-wrap">
-                    {Icon ? <Icon className="member-skill-icon" /> : <span className="member-skill-icon-text">{skill.icon[0]}</span>}
-                    <svg className="member-skill-ring" viewBox="0 0 44 44" aria-hidden="true">
-                      <circle cx="22" cy="22" r="19" fill="none" stroke="rgba(255,255,255,0.08)" strokeWidth="2.5"/>
-                      <circle cx="22" cy="22" r="19" fill="none" stroke={member.accentColor}
-                        strokeWidth="2.5" strokeLinecap="round"
-                        strokeDasharray={`${(skill.pct / 100) * 119.4} 119.4`}
-                        strokeDashoffset="29.85"
-                        style={{ transition: "stroke-dasharray 1s ease" }}
-                      />
-                    </svg>
-                  </div>
-                  <span className="member-skill-pct">{skill.pct}%</span>
-                  <span className="member-skill-name">{skill.name}</span>
+        {/* ── Skills row ── */}
+        <div className="mmp-skills-row">
+          {member.skills.map((skill) => {
+            const Icon = SkillIcons[skill.icon];
+            return (
+              <div key={skill.name} className="member-skill-pill"
+                   style={{ "--pill-accent": member.accentColor } as React.CSSProperties}>
+                <div className="member-skill-icon-wrap">
+                  {Icon ? <Icon className="member-skill-icon" /> : <span className="member-skill-icon-text">{skill.icon[0]}</span>}
+                  <svg className="member-skill-ring" viewBox="0 0 44 44" aria-hidden="true">
+                    <circle cx="22" cy="22" r="19" fill="none" stroke="rgba(255,255,255,0.08)" strokeWidth="2.5"/>
+                    <circle cx="22" cy="22" r="19" fill="none" stroke={member.accentColor}
+                      strokeWidth="2.5" strokeLinecap="round"
+                      strokeDasharray={`${(skill.pct / 100) * 119.4} 119.4`}
+                      strokeDashoffset="29.85"
+                      style={{ transition: "stroke-dasharray 1s ease" }}
+                    />
+                  </svg>
                 </div>
-              );
-            })}
-          </div>
+                <span className="member-skill-pct">{skill.pct}%</span>
+                <span className="member-skill-name">{skill.name}</span>
+              </div>
+            );
+          })}
         </div>
       </motion.div>
     </>
@@ -380,11 +430,11 @@ function useRadius() {
   useEffect(() => {
     const calc = () => {
       const w = window.innerWidth;
-      if (w <= 420)  setRadius(170);
-      else if (w <= 640)  setRadius(220);
-      else if (w <= 900)  setRadius(300);
+      if (w <= 420) setRadius(170);
+      else if (w <= 640) setRadius(220);
+      else if (w <= 900) setRadius(300);
       else if (w <= 1100) setRadius(360);
-      else                setRadius(420);
+      else setRadius(420);
     };
     calc();
     window.addEventListener("resize", calc);
@@ -396,17 +446,17 @@ function useRadius() {
 export default function TeamCarousel() {
   const BASE_RADIUS = useRadius();
   const [activeIndex, setActiveIndex] = useState(0);
-  const [isDragging, setIsDragging]   = useState(false);
-  const [isHovered, setIsHovered]     = useState(false);
-  const [openMember, setOpenMember]   = useState<Member | null>(null);
+  const [isDragging, setIsDragging] = useState(false);
+  const [isHovered, setIsHovered] = useState(false);
+  const [openMember, setOpenMember] = useState<Member | null>(null);
 
-  const angleRef        = useRef(0);
-  const targetAngleRef  = useRef(0);
-  const rafRef          = useRef<number | null>(null);
-  const ringRef         = useRef<HTMLDivElement>(null);
-  const dragStartX      = useRef(0);
-  const dragStartAngle  = useRef(0);
-  const dragDeltaRef    = useRef(0);   // px moved since pointerdown
+  const angleRef = useRef(0);
+  const targetAngleRef = useRef(0);
+  const rafRef = useRef<number | null>(null);
+  const ringRef = useRef<HTMLDivElement>(null);
+  const dragStartX = useRef(0);
+  const dragStartAngle = useRef(0);
+  const dragDeltaRef = useRef(0);   // px moved since pointerdown
   const pointerDownTime = useRef(0);   // ms since epoch
 
   /* smooth lerp */
@@ -432,9 +482,9 @@ export default function TeamCarousel() {
 
   const rotateTo = (idx: number) => {
     const current = (((-angleRef.current % 360) + 360) % 360);
-    const target  = (idx * ANGLE_STEP) % 360;
+    const target = (idx * ANGLE_STEP) % 360;
     let delta = target - current;
-    if (delta > 180)  delta -= 360;
+    if (delta > 180) delta -= 360;
     if (delta < -180) delta += 360;
     targetAngleRef.current = angleRef.current - delta;
   };
@@ -442,9 +492,9 @@ export default function TeamCarousel() {
   /* ── Stage pointer events (drag only, no capture) ── */
   const onStagePointerDown = (e: React.PointerEvent) => {
     setIsDragging(true);
-    dragStartX.current     = e.clientX;
+    dragStartX.current = e.clientX;
     dragStartAngle.current = targetAngleRef.current;
-    dragDeltaRef.current   = 0;
+    dragDeltaRef.current = 0;
     pointerDownTime.current = Date.now();
     // NOTE: deliberately NOT calling setPointerCapture — it prevents child click events
   };
@@ -520,7 +570,7 @@ export default function TeamCarousel() {
                   style={{
                     transform: `rotateY(${idx * ANGLE_STEP}deg) translateZ(${BASE_RADIUS}px)`,
                     "--accent": member.accentColor,
-                    "--glow":   member.glowColor,
+                    "--glow": member.glowColor,
                   } as React.CSSProperties}
                   onClick={(e) => onCardClick(e, member, idx)}
                   tabIndex={0}
@@ -550,7 +600,7 @@ export default function TeamCarousel() {
                   </div>
                   {isActive && (
                     <div className="team-card-active-glow"
-                      style={{ boxShadow: `0 0 0 2px ${member.accentColor}88, 0 0 40px ${member.glowColor}, 0 0 80px ${member.glowColor.replace("0.55","0.3")}` }}
+                      style={{ boxShadow: `0 0 0 2px ${member.accentColor}88, 0 0 40px ${member.glowColor}, 0 0 80px ${member.glowColor.replace("0.55", "0.3")}` }}
                       aria-hidden="true" />
                   )}
                 </div>
@@ -563,7 +613,7 @@ export default function TeamCarousel() {
         {/* Controls */}
         <div className="relative z-10 mt-8 flex items-center justify-center gap-6">
           <button onClick={() => { targetAngleRef.current += ANGLE_STEP; }} className="team-nav-btn" aria-label="Previous member">
-            <svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2.5" strokeLinecap="round" strokeLinejoin="round"><polyline points="15 18 9 12 15 6"/></svg>
+            <svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2.5" strokeLinecap="round" strokeLinejoin="round"><polyline points="15 18 9 12 15 6" /></svg>
           </button>
           <div className="flex gap-2.5" role="tablist">
             {TEAM_MEMBERS.map((m, idx) => (
@@ -574,7 +624,7 @@ export default function TeamCarousel() {
             ))}
           </div>
           <button onClick={() => { targetAngleRef.current -= ANGLE_STEP; }} className="team-nav-btn" aria-label="Next member">
-            <svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2.5" strokeLinecap="round" strokeLinejoin="round"><polyline points="9 18 15 12 9 6"/></svg>
+            <svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2.5" strokeLinecap="round" strokeLinejoin="round"><polyline points="9 18 15 12 9 6" /></svg>
           </button>
         </div>
 
