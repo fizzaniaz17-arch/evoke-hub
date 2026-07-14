@@ -97,10 +97,12 @@ function buildClientEmail(data: QuotePayload, quoteId: string): string {
           <div style="font-weight:600;color:#ffffff;margin-bottom:3px;">${s.name}</div>
           <div style="font-size:11px;color:#7090b0;">${s.category}</div>
         </td>
-        <td style="padding:12px 16px;border-bottom:1px solid #1e2a3a;text-align:right;font-weight:700;font-size:15px;color:#7ed957;">$${s.price.toLocaleString()}<span style="font-size:11px;color:#a0a8b0;">${s.unit}</span></td>
+        <td style="padding:12px 16px;border-bottom:1px solid #1e2a3a;text-align:right;font-weight:700;font-size:15px;color:#7ed957;">$${s.price.toLocaleString()}<span style="font-size:11px;color:#a0a0b0;font-weight:400;">${s.unit}</span></td>
       </tr>`
     )
     .join("");
+
+  const supportEmail = process.env.ADMIN_EMAIL ?? "support@evokehub.com";
 
   return `
 <!DOCTYPE html>
@@ -156,8 +158,8 @@ function buildClientEmail(data: QuotePayload, quoteId: string): string {
     </div>` : ""}
     <!-- CTA -->
     <div style="padding:32px 40px;text-align:center;border-bottom:1px solid #1e2a3a;">
-      <a href="mailto:support@evokehub.com" style="display:inline-block;padding:14px 36px;background:linear-gradient(135deg,#1a5276,#3498db);color:#ffffff;text-decoration:none;border-radius:999px;font-weight:600;font-size:14px;letter-spacing:0.05em;">✉️ REPLY TO THIS EMAIL</a>
-      <p style="margin:16px 0 0;font-size:12px;color:#506070;">support@evokehub.com &nbsp;·&nbsp; www.evokehub.com</p>
+      <a href="mailto:${supportEmail}" style="display:inline-block;padding:14px 36px;background:linear-gradient(135deg,#1a5276,#3498db);color:#ffffff;text-decoration:none;border-radius:999px;font-weight:700;font-size:14px;transition:transform 200ms ease;">Get in Touch</a>
+      <p style="margin:16px 0 0;font-size:12px;color:#506070;">${supportEmail} &nbsp;·&nbsp; www.evokehub.com</p>
     </div>
     <!-- Footer -->
     <div style="padding:20px 40px;text-align:center;font-size:11px;color:#405060;line-height:1.8;">
@@ -173,7 +175,7 @@ export async function POST(req: NextRequest) {
   try {
     const data: QuotePayload = await req.json();
 
-    // ── Validate ──────────────────────────────────────────────────────────────
+    // ── Validate ─────────────────────────────────────────────────────────────
     if (!data.name?.trim() || !data.email?.trim() || !data.selectedServices?.length) {
       return NextResponse.json({ error: "Missing required fields." }, { status: 400 });
     }
@@ -181,7 +183,7 @@ export async function POST(req: NextRequest) {
       return NextResponse.json({ error: "Invalid email address." }, { status: 400 });
     }
 
-    // ── Persist to DB ──────────────────────────────────────────────────────────
+    // ── Persist to DB ────────────────────────────────────────────────────────
     const quoteId = uuidv4();
     const quoteRecord: QuoteRecord = {
       quoteId,
@@ -199,7 +201,7 @@ export async function POST(req: NextRequest) {
 
     saveQuote(quoteRecord);
 
-    // ── Generate / update Excel ────────────────────────────────────────────────
+    // ── Generate / update Excel ──────────────────────────────────────────────
     let excelBuffer: Buffer | null = null;
     try {
       const allQuotes = getAllQuotes();
@@ -208,7 +210,7 @@ export async function POST(req: NextRequest) {
       console.error("[Quote API] Excel generation failed:", xlErr);
     }
 
-    // ── Check Resend API key ────────────��──────────────────────────────────────
+    // ── Check Resend API key ─────────────────────────────────────────────────
     const RESEND_API_KEY = process.env.RESEND_API_KEY;
 
     if (!RESEND_API_KEY || RESEND_API_KEY === "re_paste_your_key_here") {
@@ -241,11 +243,11 @@ export async function POST(req: NextRequest) {
       }]
       : [];
 
-    // ── Send admin notification ────────────────────────────────────────────────
+    // ── Send admin notification ──────────────────────────────────────────────
     const adminResult = await resend.emails.send({
       from: fromAddress,
       to: [adminTo],
-      replyTo: data.email,
+      reply_to: data.email,
       subject: `🔔 New Quote — ${data.name} | $${data.total.toLocaleString()} | ${data.selectedServices.length} service(s)`,
       html: buildAdminEmail(data, quoteId),
       attachments,
@@ -257,10 +259,10 @@ export async function POST(req: NextRequest) {
       console.log("[Quote API] Admin email sent ✓ id:", adminResult.data?.id);
     }
 
-    // ── Send customer confirmation ─────────────────────────────────────────────
+    // ── Send customer confirmation ───────────────────────────────────────────
     // Resend sandbox restriction: without a verified domain, emails can only be
     // delivered to the account owner's address (adminTo). We route the client
-    // confirmation through the admin inbox with replyTo = client's address so
+    // confirmation through the admin inbox with reply_to = client's address so
     // the admin can forward/reply instantly. Once a domain is verified on
     // resend.com/domains, remove the `to: [adminTo]` workaround and restore
     // `to: [data.email]`.
@@ -268,7 +270,7 @@ export async function POST(req: NextRequest) {
     const clientResult = await resend.emails.send({
       from: fromAddress,
       to: [clientEmailTo],
-      replyTo: data.email,
+      reply_to: data.email,
       subject: `[FORWARD TO CLIENT] Quote for ${data.name} <${data.email}> — $${data.total.toLocaleString()}`,
       html: buildClientEmail(data, quoteId),
     });
