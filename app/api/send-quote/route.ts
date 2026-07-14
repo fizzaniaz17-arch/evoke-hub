@@ -186,15 +186,15 @@ export async function POST(req: NextRequest) {
     const quoteRecord: QuoteRecord = {
       quoteId,
       submittedAt: new Date().toISOString(),
-      status:      "new",
-      adminNote:   "",
-      name:        data.name.trim(),
-      email:       data.email.trim(),
-      phone:       data.phone?.trim() ?? "",
-      company:     data.company?.trim() ?? "",
-      message:     data.message?.trim() ?? "",
+      status: "new",
+      adminNote: "",
+      name: data.name.trim(),
+      email: data.email.trim(),
+      phone: data.phone?.trim() ?? "",
+      company: data.company?.trim() ?? "",
+      message: data.message?.trim() ?? "",
       selectedServices: data.selectedServices,
-      total:       data.total,
+      total: data.total,
     };
 
     saveQuote(quoteRecord);
@@ -235,19 +235,19 @@ export async function POST(req: NextRequest) {
     type ResendAttachment = { filename: string; content: Buffer; contentType: string };
     const attachments: ResendAttachment[] = excelBuffer
       ? [{
-          filename: `Evoke-Hub-Quotes-${new Date().toISOString().slice(0, 10)}.xlsx`,
-          content:  excelBuffer,
-          contentType: "application/vnd.openxmlformats-officedocument.spreadsheetml.sheet",
-        }]
+        filename: `Evoke-Hub-Quotes-${new Date().toISOString().slice(0, 10)}.xlsx`,
+        content: excelBuffer,
+        contentType: "application/vnd.openxmlformats-officedocument.spreadsheetml.sheet",
+      }]
       : [];
 
     // ── Send admin notification ────────────────────────────────────────────────
     const adminResult = await resend.emails.send({
-      from:        fromAddress,
-      to:          [adminTo],
-      reply_to:    data.email,
-      subject:     `🔔 New Quote — ${data.name} | $${data.total.toLocaleString()} | ${data.selectedServices.length} service(s)`,
-      html:        buildAdminEmail(data, quoteId),
+      from: fromAddress,
+      to: [adminTo],
+      reply_to: data.email,
+      subject: `🔔 New Quote — ${data.name} | $${data.total.toLocaleString()} | ${data.selectedServices.length} service(s)`,
+      html: buildAdminEmail(data, quoteId),
       attachments,
     });
 
@@ -266,11 +266,11 @@ export async function POST(req: NextRequest) {
     // `to: [data.email]`.
     const clientEmailTo = adminTo; // ← change to data.email after domain verification
     const clientResult = await resend.emails.send({
-      from:     fromAddress,
-      to:       [clientEmailTo],
-      reply_to: data.email,
-      subject:  `[FORWARD TO CLIENT] Quote for ${data.name} <${data.email}> — $${data.total.toLocaleString()}`,
-      html:     buildClientEmail(data, quoteId),
+      from: fromAddress,
+      to: [clientEmailTo],
+      replyTo: data.email,
+      subject: `[FORWARD TO CLIENT] Quote for ${data.name} <${data.email}> — $${data.total.toLocaleString()}`,
+      html: buildClientEmail(data, quoteId),
     });
 
     if (clientResult.error) {
