@@ -716,30 +716,47 @@ a {
   }
 }
 
-/* Dot indicators — also responsive */
+/* Dot indicators */
 .team-dot {
-  /* Visual size stays small */
-  width: clamp(6px, 1.8vw, 8px);
-  height: clamp(6px, 1.8vw, 8px);
+  /* Strip ALL browser button defaults that inflate the visual size */
+  -webkit-appearance: none;
+  appearance: none;
+  padding: 0;
+  margin: 0;
+  box-sizing: border-box;
+  /* Fixed visual size — use px not vw so split-screen/tablet can't inflate */
+  width: 8px !important;
+  height: 8px !important;
+  min-width: 0 !important;
+  min-height: 0 !important;
+  max-width: 8px !important;
+  max-height: 8px !important;
   border-radius: 999px;
-  background: rgba(255, 255, 255, 0.2);
+  background: rgba(255, 255, 255, 0.25);
   border: none;
   cursor: pointer;
-  transition: transform 250ms ease, background 250ms ease, width 250ms ease;
+  transition: transform 250ms ease, background 250ms ease, width 250ms ease, max-width 250ms ease;
   position: relative;
   flex-shrink: 0;
+  display: block;
 }
 
-/* Invisible enlarged tap area — keeps visual size intact on touch/mobile */
+/* Invisible enlarged tap area — keeps visual size intact on all devices */
 .team-dot::before {
   content: "";
   position: absolute;
-  inset: -18px;
+  top: 50%;
+  left: 50%;
+  transform: translate(-50%, -50%);
+  width: 44px;
+  height: 44px;
+  border-radius: 50%;
 }
 
 .team-dot-active {
-  width: clamp(18px, 5vw, 24px);
-  background: var(--accent);
+  width: 22px !important;
+  max-width: 22px !important;
+  background: var(--accent) !important;
 }
 
 /* The rotating ring */
@@ -928,14 +945,16 @@ a {
 .team-nav-btn {
   display: grid;
   place-items: center;
-  width: 48px;
-  height: 48px;
+  /* Responsive size: 40px on small mobile, 48px on tablet+ */
+  width: clamp(38px, 10vw, 48px);
+  height: clamp(38px, 10vw, 48px);
   border-radius: 999px;
   border: 1px solid rgba(255, 255, 255, 0.12);
   background: rgba(255, 255, 255, 0.05);
   color: #ffffff;
   backdrop-filter: blur(12px);
   transition: border-color 200ms ease, background 200ms ease, transform 200ms ease;
+  flex-shrink: 0;
 }
 
 .team-nav-btn:hover {
@@ -5130,11 +5149,18 @@ a,
     min-height: 44px;
     min-width: 44px;
   }
-  /* team-dot tap area is handled via padding+box-sizing — do NOT set min-height/min-width
-     as it destroys the small visual indicator size on mobile/tablet. */
-  .team-dot {
-    min-height: unset;
-    min-width: unset;
+  /* team-dot: sizes are enforced with !important directly on the class.
+     Do NOT add min-height/min-width here — tap area handled via ::before pseudo-element. */
+  .team-dot,
+  .team-dot-active {
+    min-height: 0 !important;
+    min-width: 0 !important;
+    max-height: 8px !important;
+    max-width: 8px !important;
+    padding: 0 !important;
+  }
+  .team-dot-active {
+    max-width: 22px !important;
   }
 
   /* Service tiles specifically need taller touch area */
