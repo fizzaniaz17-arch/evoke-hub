@@ -718,6 +718,7 @@ a {
 
 /* Dot indicators — also responsive */
 .team-dot {
+  /* Visual size stays small */
   width: clamp(6px, 1.8vw, 8px);
   height: clamp(6px, 1.8vw, 8px);
   border-radius: 999px;
@@ -725,6 +726,15 @@ a {
   border: none;
   cursor: pointer;
   transition: transform 250ms ease, background 250ms ease, width 250ms ease;
+  position: relative;
+  flex-shrink: 0;
+}
+
+/* Invisible enlarged tap area — keeps visual size intact on touch/mobile */
+.team-dot::before {
+  content: "";
+  position: absolute;
+  inset: -18px;
 }
 
 .team-dot-active {
@@ -1079,22 +1089,31 @@ a {
   min-height: 155px;
   border: none;
   border-radius: 20px;
-  background-color: rgba(10, 15, 30, 0.55);
+  /* Base dark fill — also the fallback when bg image is absent */
+  background-color: rgba(8, 13, 28, 0.72);
   cursor: pointer;
   overflow: hidden;
   outline: none;
   text-align: center;
+  /* Backdrop blur applied directly on the element — the only cross-browser safe approach.
+     Pseudo-element backdrop-filter is non-spec and broken in many browsers. */
+  backdrop-filter: blur(18px) saturate(1.4);
+  -webkit-backdrop-filter: blur(18px) saturate(1.4);
   /* Smooth lift + scale on hover */
   transition:
     transform 420ms cubic-bezier(0.22, 1, 0.36, 1),
-    box-shadow 420ms cubic-bezier(0.22, 1, 0.36, 1);
-  /* Subtle depth shadow */
+    box-shadow 420ms cubic-bezier(0.22, 1, 0.36, 1),
+    backdrop-filter 420ms cubic-bezier(0.22, 1, 0.36, 1);
+  /* Subtle depth shadow + inner top-edge specular */
   box-shadow:
     0 2px 16px rgba(0, 0, 0, 0.45),
-    inset 0 1px 0 rgba(255, 255, 255, 0.10);
+    inset 0 1px 0 rgba(255, 255, 255, 0.14),
+    inset 0 0 0 1px rgba(255, 255, 255, 0.07);
+  /* Prevent blur from leaking outside border radius */
+  isolation: isolate;
 }
 
-/* ── Background image layer ───────────────────────────── */
+/* ── Background image layer (lowest) ──────────────────── */
 .service-tile::after {
   content: "";
   position: absolute;
@@ -1102,38 +1121,36 @@ a {
   background-image: var(--tile-bg);
   background-size: cover;
   background-position: center;
-  opacity: 0.58;
-  transition: opacity 450ms cubic-bezier(0.22, 1, 0.36, 1),
-              transform 450ms cubic-bezier(0.22, 1, 0.36, 1);
+  opacity: 0.52;
+  transition:
+    opacity 450ms cubic-bezier(0.22, 1, 0.36, 1),
+    transform 450ms cubic-bezier(0.22, 1, 0.36, 1);
   pointer-events: none;
   z-index: 0;
   border-radius: inherit;
 }
 
-/* ── Frosted glass overlay ────────────────────────────── */
+/* ── Gloss / sheen gradient overlay (on top of image) ─── */
 .service-tile::before {
   content: "";
   position: absolute;
   inset: 0;
   border-radius: inherit;
-  /* Glass panel */
+  /* Angled gloss: bright top-left streak, dark bottom-right */
   background: linear-gradient(
     145deg,
-    rgba(255, 255, 255, 0.08) 0%,
-    rgba(255, 255, 255, 0.04) 60%,
-    rgba(0, 0, 0, 0.12) 100%
+    rgba(255, 255, 255, 0.11) 0%,
+    rgba(255, 255, 255, 0.05) 45%,
+    rgba(0,   0,   0,   0.18) 100%
   );
-  backdrop-filter: blur(22px) saturate(1.5);
-  -webkit-backdrop-filter: blur(22px) saturate(1.5);
-  /* Inner highlight top-edge + subtle border */
+  /* Top-edge highlight simulating light refraction */
   box-shadow:
-    inset 0 1px 0 rgba(255, 255, 255, 0.22),
-    inset 0 0 0 1px rgba(255, 255, 255, 0.10);
+    inset 0 1px 0 rgba(255, 255, 255, 0.28),
+    inset 0 0 0 1px rgba(255, 255, 255, 0.09);
   z-index: 1;
   pointer-events: none;
   transition:
     background 420ms cubic-bezier(0.22, 1, 0.36, 1),
-    backdrop-filter 420ms cubic-bezier(0.22, 1, 0.36, 1),
     box-shadow 420ms cubic-bezier(0.22, 1, 0.36, 1);
 }
 
@@ -1147,29 +1164,29 @@ a {
 /* ── Hover state ──────────────────────────────────────── */
 .service-tile:hover {
   transform: translateY(-8px) scale(1.03);
+  backdrop-filter: blur(26px) saturate(1.8);
+  -webkit-backdrop-filter: blur(26px) saturate(1.8);
   box-shadow:
     0 20px 50px rgba(0, 0, 0, 0.55),
     0 0 0 1px rgba(255, 255, 255, 0.18),
-    inset 0 1px 0 rgba(255, 255, 255, 0.20);
+    inset 0 1px 0 rgba(255, 255, 255, 0.28);
 }
 
 .service-tile:hover::after {
-  opacity: 0.80;
+  opacity: 0.75;
   transform: scale(1.08);
 }
 
 .service-tile:hover::before {
   background: linear-gradient(
     145deg,
-    rgba(255, 255, 255, 0.13) 0%,
-    rgba(255, 255, 255, 0.06) 60%,
-    rgba(0, 0, 0, 0.06) 100%
+    rgba(255, 255, 255, 0.16) 0%,
+    rgba(255, 255, 255, 0.07) 50%,
+    rgba(0, 0, 0, 0.08) 100%
   );
-  backdrop-filter: blur(28px) saturate(1.8);
-  -webkit-backdrop-filter: blur(28px) saturate(1.8);
   box-shadow:
-    inset 0 1px 0 rgba(255, 255, 255, 0.35),
-    inset 0 0 0 1px rgba(255, 255, 255, 0.18);
+    inset 0 1px 0 rgba(255, 255, 255, 0.42),
+    inset 0 0 0 1px rgba(255, 255, 255, 0.16);
 }
 
 .service-tile:hover .service-tile-label {
@@ -1199,6 +1216,8 @@ a {
 /* ── Active state — blue-tinted frost ─────────────────── */
 .service-tile--active {
   transform: translateY(-4px) scale(1.015);
+  backdrop-filter: blur(22px) saturate(1.6);
+  -webkit-backdrop-filter: blur(22px) saturate(1.6);
   box-shadow:
     0 14px 40px rgba(52, 152, 219, 0.30),
     0 0 0 1.5px rgba(52, 152, 219, 0.55),
@@ -4414,6 +4433,9 @@ body {
   .calc-submit-btn {
     min-height: 44px;
     min-width: 44px;
+    /* Cap the nav buttons so they never inflate beyond design spec */
+    max-height: 52px;
+    max-width: 52px;
   }
 
   .nav-mobile-link {
@@ -5092,7 +5114,6 @@ a,
   .icon-button,
   .team-nav-btn,
   .stack-dot,
-  .team-dot,
   .alh-dot,
   .vt-play-ring,
   .member-modal-close,
@@ -5108,6 +5129,12 @@ a,
   .vid-channel-cta {
     min-height: 44px;
     min-width: 44px;
+  }
+  /* team-dot tap area is handled via padding+box-sizing — do NOT set min-height/min-width
+     as it destroys the small visual indicator size on mobile/tablet. */
+  .team-dot {
+    min-height: unset;
+    min-width: unset;
   }
 
   /* Service tiles specifically need taller touch area */
